@@ -43,9 +43,10 @@ namespace WpfApp2
             obj.Show();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void removeSelectedLayoutItem(object sender, RoutedEventArgs e)
         {
- 
+            //String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
+            listBox.Items.Remove(listBox.SelectedIndex);
         }
 
         private void addLayout(object sender, RoutedEventArgs e)
@@ -57,15 +58,18 @@ namespace WpfApp2
 
         private void layoutSelected(object sender, SelectionChangedEventArgs e)
         {
-           String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
-           String []color = selectedItem.Split(',');
-            byte R= Convert.ToByte(color[1]);
-            byte G = Convert.ToByte(color[2]);
-            byte B = Convert.ToByte(color[3]);
+            if (listBox.Items[listBox.SelectedIndex] != null)
+            {
+                String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
+                String[] color = selectedItem.Split(',');
+                byte R = Convert.ToByte(color[1]);
+                byte G = Convert.ToByte(color[2]);
+                byte B = Convert.ToByte(color[3]);
 
-            //MessageBox.Show("R" +R + "G" + G + "B" + B);
+                //MessageBox.Show("R" +R + "G" + G + "B" + B);
 
-            buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R,G,B));
+                buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+            }
         }
     }
 }
