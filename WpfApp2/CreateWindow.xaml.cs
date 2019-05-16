@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+ 
 
 namespace WpfApp2
 {
@@ -40,8 +41,9 @@ namespace WpfApp2
                 var G = colorPicker.SelectedColor.Value.G;
                 var B = colorPicker.SelectedColor.Value.B;
                
-                MessageBox.Show("Name : " + layoutName + " R" + R + " G" + G + " B" + B);
-                
+                String text = layoutName + "," + R + "," + G + "," + B;
+                ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(text);
+                this.Close();
             }
             else {
                 MessageBox.Show("Please check Color or Name");

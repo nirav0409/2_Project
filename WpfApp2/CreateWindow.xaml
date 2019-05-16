@@ -11,7 +11,11 @@
         <TextBox  x:Name="layoutNameTextBox" HorizontalAlignment="Left"  Margin="85,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="27,34,0,0" VerticalAlignment="Top"/>
         <xctk:ColorCanvas x:Name="colorPicker" Margin="25,72,51,59"  />
-        <Button Content="OK" HorizontalAlignment="Left" Margin="44,378,0,0" VerticalAlignment="Top" Width="75" Click="OkButtonClicked"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="44,378,0,0" VerticalAlignment="Top" Width="75" Click="OkButtonClicked">
+            <Button.BindingGroup>
+                <BindingGroup NotifyOnValidationError="True"/>
+            </Button.BindingGroup>
+        </Button>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="157,377,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
     </Grid>
 </Window>

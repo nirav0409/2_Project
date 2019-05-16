@@ -54,5 +54,18 @@ namespace WpfApp2
             createWindow.Show();
 
         }
+
+        private void layoutSelected(object sender, SelectionChangedEventArgs e)
+        {
+           String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
+           String []color = selectedItem.Split(',');
+            byte R= Convert.ToByte(color[1]);
+            byte G = Convert.ToByte(color[2]);
+            byte B = Convert.ToByte(color[3]);
+
+            //MessageBox.Show("R" +R + "G" + G + "B" + B);
+
+            buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R,G,B));
+        }
     }
 }
