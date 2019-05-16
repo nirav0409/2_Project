@@ -37,7 +37,7 @@ namespace WpfApp2
             configWindow.Show();
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        private void remoteButtonClick(object sender, RoutedEventArgs e)
         {
             PromptBox obj = new PromptBox();
             obj.Show();
@@ -46,6 +46,13 @@ namespace WpfApp2
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
  
+        }
+
+        private void addLayout(object sender, RoutedEventArgs e)
+        {
+            CreateWindow createWindow = new CreateWindow();
+            createWindow.Show();
+
         }
     }
 }

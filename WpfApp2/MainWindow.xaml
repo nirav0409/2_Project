@@ -5,43 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="250">
+        Title="MainWindow" Height="400" Width="600">
     <Grid>
-        <Button Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="Button_Click_1">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="Button_Click_2">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="Button1" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="Button1_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67">
-            <Button.Background>
-                <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
-            </Button.Background>
-        </Button>
+        <Grid Background="Red" x:Name="buttonGrid" Margin="334,0,0,0">
+            <Button Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Button1" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67" Click="remoteButtonClick">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <Grid  x:Name="mainGrid" Height="400" Width="313" HorizontalAlignment="Left"  Margin="-1,-2,0,-29" VerticalAlignment="Top">
+            <Label Content="Label" HorizontalAlignment="Left" Margin="21,367,0,0" VerticalAlignment="Top"/>
+            <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="Button_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Button Content="" HorizontalAlignment="Left" Margin="104,292,0,0" VerticalAlignment="Top" Width="33" Click="addLayout">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <ListBox HorizontalAlignment="Left" Height="250" Margin="39,33,0,0" VerticalAlignment="Top" Width="228">
+                <ListBoxItem Content="ListBoxItem"/>
+            </ListBox>
+            <Button Content="Save" HorizontalAlignment="Left" Margin="12,326,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Load" HorizontalAlignment="Left" Margin="97,326,0,0" VerticalAlignment="Top" Width="75"/>
+            <ComboBox HorizontalAlignment="Left" Margin="180,326,0,0" VerticalAlignment="Top" Width="40"/>
 
+        </Grid>
     </Grid>
 </Window>

@@ -20,7 +20,6 @@ namespace WpfApp2
     public partial class ConfigWindow : Window
     {
 
-        public static CreateWindow createWindow;
 
         public ConfigWindow()
         {
@@ -34,8 +33,7 @@ namespace WpfApp2
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-             createWindow = new CreateWindow();
-             createWindow.Show();
+
         }
     }
 }
