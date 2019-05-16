@@ -24,14 +24,31 @@ namespace WpfApp2
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+
+        }
+
+        private void OkButtonClicked(object sender, RoutedEventArgs e)
+        {
+            String layoutName =layoutNameTextBox.Text;
+            if (colorPicker.SelectedColor != null && !String.IsNullOrEmpty(layoutName))
+            {
+                var R = colorPicker.SelectedColor.Value.R;
+                var G = colorPicker.SelectedColor.Value.G;
+                var B = colorPicker.SelectedColor.Value.B;
+               
+                MessageBox.Show("Name : " + layoutName + " R" + R + " G" + G + " B" + B);
+                
+            }
+            else {
+                MessageBox.Show("Please check Color or Name");
+            }
+
+
+        
 
         }
     }
