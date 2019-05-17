@@ -83,5 +83,18 @@ namespace WpfApp2
         {
 
         }
+
+        private void cancelButtonClicked(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void okButtonClicked(object sender, RoutedEventArgs e)
+        {
+            bool holdChecked = (bool)holdCheckbox.IsChecked;
+            bool letterChecked = (bool)letterCheckbox.IsChecked;
+            bool mediacChecked = (bool)mediaCheckbox.IsChecked;
+
+        }
     }
 }
