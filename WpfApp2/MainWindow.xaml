@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600">
     <Grid>
-        <Grid Background="Red" x:Name="buttonGrid" Margin="334,0,0,0">
+        <Grid  x:Name="buttonGrid" Margin="334,0,0,0">
             <Button Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>

@@ -93,6 +93,7 @@
     <Compile Include="CreateWindow.xaml.cs">
       <DependentUpon>CreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Layout.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -141,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Rotate_Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StateFile\stateFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
