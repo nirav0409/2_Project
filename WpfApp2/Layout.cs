@@ -6,21 +6,36 @@ using System.Threading.Tasks;
 
 namespace WpfApp2
 {
-    class Layout
+    public class Layout
     {
         int[] color = new int[3];
-        ButtonValues[] buttonValues = new ButtonValues[6];
+        ButtonValues[] buttonValues;
+
         String layoutName;
         int layoutIndex;
         public Layout()
         {
+           buttonValues = new ButtonValues[6];
+            for(int i = 0; i < 6; i++)
+            {
+                buttonValues[i] = new ButtonValues();
+            }
+
+        }
+
+        public String getValueofButton(int index)
+        {
+            return this.buttonValues[index].getValue();
+        }
+        public int getTypeOfButton(int index)
+        {
+            return this.buttonValues[index].getType();
         }
         
-
         public void setValueofButton(int index , int type , String value)
         {
-            buttonValues[index].setType(type);
-            buttonValues[index].setValue(value);
+            this.buttonValues[index].setType(type);
+            this.buttonValues[index].setValue(value);
             
         }
         public void setColor(int R, int G , int B)
@@ -67,7 +82,8 @@ namespace WpfApp2
 
             public ButtonValues()
             {
-
+                this.buttonType = -1;
+                this.value = "";
             }
             public ButtonValues( int type , String Value)
             {

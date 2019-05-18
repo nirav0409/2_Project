@@ -101,12 +101,7 @@ namespace WpfApp2
                 MessageBox.Show("Invalid Selection");
             }
 
-            //Only letter is checked
-            if (letterChecked & !(mediaChecked) & !(holdChecked))
-            {
-                String text = letterTextbox.Text;
-                MessageBox.Show(text);
-            }
+
 
             // Only Hold is checked
             if (holdChecked & !(mediaChecked) & !(letterChecked))
@@ -114,15 +109,35 @@ namespace WpfApp2
                 String text1 = holdCombo1.Text;
                 String text2 = holdCombo2.Text;
                 String text3 = holdCombo3.Text;
-
-                MessageBox.Show(text1 + "+" + text2 + "+" + text3);
+                int buttonIndex = 0;
+                int layoutIndex = 0;
+               ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 0, text1 + "+" + text2 + "+" + text3);
+                this.Close();
+                //      MessageBox.Show(text1 + "+" + text2 + "+" + text3);
             }
+
+            //Only letter is checked
+            if (letterChecked & !(mediaChecked) & !(holdChecked))
+            {
+                String text = letterTextbox.Text;
+                int buttonIndex = 0;
+                int layoutIndex = 0;
+                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 1, text);
+                this.Close();
+
+                //    MessageBox.Show(text);
+            }
+
 
             // Only media is checked 
             if (mediaChecked & !(letterChecked) & !(holdChecked))
             {
                 String text = mediaCombobox.Text;
-                MessageBox.Show(text);
+                int buttonIndex = 0;
+                int layoutIndex = 0;
+                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 2, text);
+                this.Close();
+                //  MessageBox.Show(text);
 
             }
 
@@ -131,7 +146,11 @@ namespace WpfApp2
             {
                 String mediaText = mediaCombobox.Text;
                 String letterText = letterTextbox.Text;
-                MessageBox.Show(mediaText + "+" + letterText);
+                int buttonIndex = 0;
+                int layoutIndex = 0;
+                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 3, mediaText + "+" + letterText);
+                this.Close();
+                //  MessageBox.Show(mediaText + "+" + letterText);
 
             }
 

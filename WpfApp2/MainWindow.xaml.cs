@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace WpfApp2
     public partial class MainWindow : Window
     {
 
-        List<Layout> layouts;
+        public  List<Layout> layouts;
 
         public MainWindow()
         {
@@ -31,7 +32,11 @@ namespace WpfApp2
             InitUI();
 
         }
-
+   
+        public List<Layout> GetLayout()
+        {
+            return this.layouts;
+        }
         private void InitUI()
         {
             foreach (var layout in layouts)
@@ -77,7 +82,7 @@ namespace WpfApp2
             catch (Exception e)
             {
                 // Let the user know what went wrong.
-
+                Debug.WriteLine(e.ToString());
             }
         }
 
@@ -96,7 +101,49 @@ namespace WpfApp2
 
         private void remoteButtonClick(object sender, RoutedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("Selected Item " + listBox.SelectedIndex);
+            int buttonIndex = 0;
+            int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
             PromptBox obj = new PromptBox();
+            switch (buttonType)
+            {
+
+                case -1:
+                    //nothing selected case
+                    break;
+                case 0:
+                    //hold selected case
+                    String buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    string[] splitedvalues = buttonValue.Split('+');
+                    obj.holdCombo1.Text = splitedvalues[0];
+                    obj.holdCombo2.Text = splitedvalues[1];
+                    obj.holdCombo3.Text = splitedvalues[2];
+                    obj.holdCheckbox.IsChecked = true;
+
+                    break;
+                case 1:
+                    //letter/Text selected case
+                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    obj.letterTextbox.Text = buttonValue;
+                    obj.letterCheckbox.IsChecked = true;
+                    break;
+                case 2:
+                    //Media selected case
+                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    obj.mediaCombobox.Text = buttonValue;
+                    obj.mediaCheckbox.IsChecked = true;
+
+                    break;
+                case 3:
+                    // letter/Text and Media selected case
+                     buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                     splitedvalues = buttonValue.Split('+');
+                     obj.mediaCombobox.Text = splitedvalues[0];
+                     obj.letterTextbox.Text = splitedvalues[1];
+                     obj.letterCheckbox.IsChecked = true;
+                     obj.mediaCheckbox.IsChecked = true;
+                    break;
+            }
             obj.Show();
         }
 
