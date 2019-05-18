@@ -50,9 +50,9 @@ namespace WpfApp2
                                 "Media Play/Pause","Media Volume Mute","Media Volume Up","Media Volume Down" };
             for (int i = 0; i < mediaArray.Length; i++)
             {
-                MediaCombo.Items.Add(mediaArray[i]);
+                mediaCombobox.Items.Add(mediaArray[i]);
             }
-          
+
 
 
         }
@@ -93,8 +93,64 @@ namespace WpfApp2
         {
             bool holdChecked = (bool)holdCheckbox.IsChecked;
             bool letterChecked = (bool)letterCheckbox.IsChecked;
-            bool mediacChecked = (bool)mediaCheckbox.IsChecked;
+            bool mediaChecked = (bool)mediaCheckbox.IsChecked;
 
+            if ((!holdChecked & !letterChecked & !mediaChecked) || (holdChecked & letterChecked & mediaChecked)
+                || ((mediaChecked || letterChecked) & holdChecked))
+            {
+                MessageBox.Show("Invalid Selection");
+            }
+
+            //Only letter is checked
+            if (letterChecked & !(mediaChecked) & !(holdChecked))
+            {
+                String text = letterTextbox.Text;
+                MessageBox.Show(text);
+            }
+
+            // Only Hold is checked
+            if (holdChecked & !(mediaChecked) & !(letterChecked))
+            {
+                String text1 = holdCombo1.Text;
+                String text2 = holdCombo2.Text;
+                String text3 = holdCombo3.Text;
+
+                MessageBox.Show(text1 + "+" + text2 + "+" + text3);
+            }
+
+            // Only media is checked 
+            if (mediaChecked & !(letterChecked) & !(holdChecked))
+            {
+                String text = mediaCombobox.Text;
+                MessageBox.Show(text);
+
+            }
+
+            // media and letter is checked
+            if (mediaChecked & letterChecked & !(holdChecked))
+            {
+                String mediaText = mediaCombobox.Text;
+                String letterText = letterTextbox.Text;
+                MessageBox.Show(mediaText + "+" + letterText);
+
+            }
+
+        }
+
+        private void mediaUnchecked(object sender, RoutedEventArgs e)
+        {
+            mediaCombobox.Text = "";
+
+        }
+        private void letterUnchecked(object sender, RoutedEventArgs e)
+        {
+            letterTextbox.Text = "";
+        }
+        private void holdUnchecked(object sender, RoutedEventArgs e)
+        {
+            holdCombo1.Text = "";
+            holdCombo2.Text = "";
+            holdCombo3.Text = "";
         }
     }
 }
