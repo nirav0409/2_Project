@@ -12,7 +12,8 @@ namespace WpfApp2
         /// <summary>
         /// Media Constants
         /// </summary>
-        public static String path = "C:\\Users\\Lenovo\\source\\repos\\WpfApp2\\WpfApp2\\StateFile\\stateFile.txt";
+        public static String path = "D:\\Nirav\\stateFile\\stateFile.txt";
+        public static String pathOut = "D:\\Nirav\\stateFile\\stateFile_out.txt";
         public static int MEDIA_FAST_FORWARD = 0xB3;
         public static int MEDIA_REWIND = 0xB4;
         public static int MEDIA_NEXT = 0xB5;

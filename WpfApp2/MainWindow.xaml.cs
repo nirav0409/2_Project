@@ -64,15 +64,15 @@ namespace WpfApp2
                         layouts.Add(new Layout());
                         String layoutName = sr.ReadLine();
                         String[] colors = sr.ReadLine().Split(',');
-                        String[] buttonTypes = sr.ReadLine().Split(',');
-                        String[] buttonValues = sr.ReadLine().Split(',');
+
 
                         layouts[i].setColor(Int32.Parse(colors[0]), Int32.Parse(colors[1]), Int32.Parse(colors[2]));
                         layouts[i].setLayoutIndex(i);
                         layouts[i].setLayoutName(layoutName);
                         for ( int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
                         {
-                            layouts[i].setValueofButton(buttonIndex,Int32.Parse(buttonTypes[buttonIndex]),buttonValues[buttonIndex]); 
+                            String[] buttonTypeAndValue = sr.ReadLine().Split(',');
+                            layouts[i].setValueofButton(buttonIndex,Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]); 
                         }
                         
 
@@ -174,6 +174,25 @@ namespace WpfApp2
 
                 buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
             }
+        }
+
+        private void saveButtonClicked(object sender, RoutedEventArgs e)
+        {
+            StreamWriter streamWriter = new StreamWriter(Constants.pathOut);
+            streamWriter.WriteLine(this.layouts.Count);
+
+            foreach(Layout layout in layouts)
+            {
+                streamWriter.WriteLine(layout.getLayoutName());
+                streamWriter.WriteLine(layout.getR()+","+ layout.getG() + ","+layout.getB());
+                for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                {
+                    streamWriter.WriteLine(layout.getTypeOfButton(buttonIndex) + ","+ layout.getValueofButton(buttonIndex));
+                }
+
+            }
+            streamWriter.Close();
+            MessageBox.Show("Saved");
         }
     }
 }
