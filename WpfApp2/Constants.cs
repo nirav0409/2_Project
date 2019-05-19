@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace WpfApp2
         /// </summary>
         public static String path = "D:\\Nirav\\stateFile\\stateFile.txt";
         public static String pathOut = "D:\\Nirav\\stateFile\\stateFile.txt";
+        public static String pathUno= "D:\\Nirav\\stateFile\\Uno.txt";
         public static int MEDIA_FAST_FORWARD = 0xB3;
         public static int MEDIA_REWIND = 0xB4;
         public static int MEDIA_NEXT = 0xB5;
@@ -63,9 +65,5 @@ namespace WpfApp2
         public static int KEY_F10 = 0xCB;
         public static int KEY_F11 = 0xCC;
         public static int KEY_F12 = 0xCD;
-
-
-
-       
-}
+    }
 }

@@ -206,7 +206,59 @@ namespace WpfApp2
 
             }
             streamWriter.Close();
+            createHIDaction();
+
             MessageBox.Show("Saved");
+        }
+
+        private void createHIDaction()
+        {
+            StreamWriter stream = new StreamWriter(Constants.pathUno);
+            stream.WriteLine("void HIDaction(byte input) { \n\t byte mode = input >> 3; \n\t byte button = input & 0b00000111;");
+            int numberOfLayouts = layouts.Count;
+            String switchVar = "mode";
+            stream.WriteLine("\n\t" + createSwitchCase(numberOfLayouts, switchVar));
+            stream.WriteLine("\n}");
+            stream.Close();
+
+           
+        }
+
+        private String createSwitchCase(int numberOfCases, string switchVar)
+        {
+            StringBuilder switchCase = new StringBuilder();
+
+            switchCase.Append("\n\tswitch(" + switchVar + ")" + " {");
+            for (int i = 1; i < numberOfCases + 1; i++)
+            {
+                switchCase.Append("\n\t\tcase " + i + ":");
+                //add function to add cmds
+                switchCase.Append("\n" + getCaseCodeForLayout(i));
+                switchCase.Append("\n\t\tbreak;");
+            }
+            switchCase.Append("\n\t}");
+            return switchCase.ToString();
+        }
+
+        private string getCaseCodeForLayout(int layoutNumber)
+        {
+            StringBuilder caseCodeForLayout = new StringBuilder();
+            caseCodeForLayout.Append("\n\t\t\tswitch(" + "button" + ")" + " {");
+            for (int i = 1; i <= 7; i++)
+            {
+                caseCodeForLayout.Append("\n\t\t\t\tcase " + i + ":");
+                caseCodeForLayout.Append(getButtonCaseCode(layoutNumber, i));
+                caseCodeForLayout.Append("\n\t\t\t\tbreak;");
+
+            }
+            caseCodeForLayout.Append("\n\t\t\t}");
+
+            return caseCodeForLayout.ToString();
+        }
+
+        private String getButtonCaseCode(object layoutNumber, int i)
+        {
+            return "Nirav";
         }
     }
 }
