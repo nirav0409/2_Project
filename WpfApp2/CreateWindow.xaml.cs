@@ -37,12 +37,17 @@ namespace WpfApp2
             String layoutName =layoutNameTextBox.Text;
             if (colorPicker.SelectedColor != null && !String.IsNullOrEmpty(layoutName))
             {
-                var R = colorPicker.SelectedColor.Value.R;
-                var G = colorPicker.SelectedColor.Value.G;
-                var B = colorPicker.SelectedColor.Value.B;
+                int R = colorPicker.SelectedColor.Value.R;
+                int G = colorPicker.SelectedColor.Value.G;
+                int B = colorPicker.SelectedColor.Value.B;
                
                 String text = layoutName + "," + R + "," + G + "," + B;
+                Layout layout = new Layout();
+                layout.setLayoutName(layoutName);
+                layout.setColor(R,G,B);
+                ((MainWindow)Application.Current.MainWindow).layouts.Add(layout);
                 ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(text);
+
                 this.Close();
             }
             else {

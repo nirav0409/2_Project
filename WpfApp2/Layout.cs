@@ -55,7 +55,7 @@ namespace WpfApp2
         }
         public int getB()
         {
-            return color[1];
+            return color[2];
         }
         public int getLayoutIndex()
         {

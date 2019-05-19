@@ -102,15 +102,14 @@ namespace WpfApp2
             }
 
 
-
+            int buttonIndex = getButtonIndex();
+            int layoutIndex = getLayoutIndex();
             // Only Hold is checked
             if (holdChecked & !(mediaChecked) & !(letterChecked))
             {
                 String text1 = holdCombo1.Text;
                 String text2 = holdCombo2.Text;
                 String text3 = holdCombo3.Text;
-                int buttonIndex = 0;
-                int layoutIndex = 0;
                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 0, text1 + "+" + text2 + "+" + text3);
                 this.Close();
                 //      MessageBox.Show(text1 + "+" + text2 + "+" + text3);
@@ -120,8 +119,6 @@ namespace WpfApp2
             if (letterChecked & !(mediaChecked) & !(holdChecked))
             {
                 String text = letterTextbox.Text;
-                int buttonIndex = 0;
-                int layoutIndex = 0;
                 ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 1, text);
                 this.Close();
 
@@ -133,8 +130,6 @@ namespace WpfApp2
             if (mediaChecked & !(letterChecked) & !(holdChecked))
             {
                 String text = mediaCombobox.Text;
-                int buttonIndex = 0;
-                int layoutIndex = 0;
                 ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 2, text);
                 this.Close();
                 //  MessageBox.Show(text);
@@ -146,8 +141,6 @@ namespace WpfApp2
             {
                 String mediaText = mediaCombobox.Text;
                 String letterText = letterTextbox.Text;
-                int buttonIndex = 0;
-                int layoutIndex = 0;
                 ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 3, mediaText + "+" + letterText);
                 this.Close();
                 //  MessageBox.Show(mediaText + "+" + letterText);
@@ -156,6 +149,14 @@ namespace WpfApp2
 
         }
 
+        private int getButtonIndex()
+        {
+           return  (this.Title[this.Title.Length -1]-'0')-1;
+        }
+        private int getLayoutIndex()
+        {
+           return ((MainWindow)Application.Current.MainWindow).listBox.SelectedIndex;
+        }
         private void mediaUnchecked(object sender, RoutedEventArgs e)
         {
             mediaCombobox.Text = "";

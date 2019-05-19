@@ -8,37 +8,37 @@
         Title="MainWindow" Height="400" Width="600">
     <Grid>
         <Grid  x:Name="buttonGrid" Margin="334,0,0,0">
-            <Button Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button1"  Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button2" Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button3" Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button4" Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button1" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button0" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick">
+            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67" >
+            <Button x:Name="Button6" Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67" >
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
@@ -47,7 +47,7 @@
         <Grid  x:Name="mainGrid" Height="400" Width="313" HorizontalAlignment="Left"  Margin="-1,-2,0,-29" VerticalAlignment="Top">
             <Label Content="Label" HorizontalAlignment="Left" Margin="21,367,0,0" VerticalAlignment="Top"/>
             <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="Button_Click">
+            <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>

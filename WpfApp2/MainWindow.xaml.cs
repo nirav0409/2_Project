@@ -101,10 +101,17 @@ namespace WpfApp2
 
         private void remoteButtonClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Item " + listBox.SelectedIndex);
-            int buttonIndex = 0;
+            if(listBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select Layout");
+                return;
+            }  
+            var button = sender as Button;
+            String buttonName = button.Name.ToString();
+            int buttonIndex = buttonName[buttonName.Length-1] - '0';
             int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
             PromptBox obj = new PromptBox();
+            obj.Title = "Button Config Window of Button :" + (buttonIndex+1);
             switch (buttonType)
             {
 
@@ -150,7 +157,14 @@ namespace WpfApp2
         private void removeSelectedLayoutItem(object sender, RoutedEventArgs e)
         {
             //String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
-            listBox.Items.Remove(listBox.SelectedIndex);
+            if(listBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please Select Layout");
+                return;
+            }
+            layouts.RemoveAt(listBox.SelectedIndex);
+            listBox.Items.RemoveAt(listBox.SelectedIndex);
+            this.buttonGrid.Background = Brushes.White;
         }
 
         private void addLayout(object sender, RoutedEventArgs e)
@@ -162,7 +176,7 @@ namespace WpfApp2
 
         private void layoutSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (listBox.Items[listBox.SelectedIndex] != null)
+            if (listBox.SelectedIndex > 0)
             {
                 String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
                 String[] color = selectedItem.Split(',');
