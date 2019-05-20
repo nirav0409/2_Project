@@ -41,12 +41,11 @@ namespace WpfApp2
                 int G = colorPicker.SelectedColor.Value.G;
                 int B = colorPicker.SelectedColor.Value.B;
                
-                String text = layoutName + "," + R + "," + G + "," + B;
                 Layout layout = new Layout();
                 layout.setLayoutName(layoutName);
                 layout.setColor(R,G,B);
                 ((MainWindow)Application.Current.MainWindow).layouts.Add(layout);
-                ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(text);
+                ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(layoutName);
 
                 this.Close();
             }

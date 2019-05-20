@@ -8,37 +8,46 @@
         Title="MainWindow" Height="400" Width="600">
     <Grid>
         <Grid  x:Name="buttonGrid" Margin="334,0,0,0">
-            <Button x:Name="Button1"  Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button1"  Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button2" Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button2" Content="" HorizontalAlignment="Left" Margin="178,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button3" Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button3" Content="" HorizontalAlignment="Left" Margin="52,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button4" Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button4" Content="" HorizontalAlignment="Left" Margin="141,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button0" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick">
+            <Button x:Name="Button0" Content="" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick">
+            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="Button6" Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67" >
+            <Button x:Name="Button6" Content="" HorizontalAlignment="Left" Margin="141,53,0,0" VerticalAlignment="Top" Width="67" Height="67" BorderThickness="0" >
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>

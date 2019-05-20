@@ -23,7 +23,7 @@ namespace WpfApp2
     public partial class MainWindow : Window
     {
 
-        public  List<Layout> layouts;
+        public List<Layout> layouts;
 
         public MainWindow()
         {
@@ -32,7 +32,7 @@ namespace WpfApp2
             InitUI();
 
         }
-   
+
         public List<Layout> GetLayout()
         {
             return this.layouts;
@@ -41,12 +41,13 @@ namespace WpfApp2
         {
             foreach (var layout in layouts)
             {
-                listBox.Items.Add(layout.getLayoutName() + "," + layout.getR()+"," + layout.getG() + "," + layout.getB());
+                listBox.Items.Add(layout.getLayoutName() + "," + layout.getR() + "," + layout.getG() + "," + layout.getB());
             }
         }
 
         private void InitFromFile()
         {
+            layouts = new List<Layout>();
             try
             {
                 // Create an instance of StreamReader to read from a file.
@@ -57,9 +58,8 @@ namespace WpfApp2
                     // Read and display lines from the file until 
                     // the end of the file is reached. 
                     int numOfLayouts = Int32.Parse(sr.ReadLine());
-                    layouts = new List<Layout>();
-                   
-                    for(int i = 0; i < numOfLayouts; i++)
+
+                    for (int i = 0; i < numOfLayouts; i++)
                     {
                         layouts.Add(new Layout());
                         String layoutName = sr.ReadLine();
@@ -69,12 +69,12 @@ namespace WpfApp2
                         layouts[i].setColor(Int32.Parse(colors[0]), Int32.Parse(colors[1]), Int32.Parse(colors[2]));
                         layouts[i].setLayoutIndex(i);
                         layouts[i].setLayoutName(layoutName);
-                        for ( int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                        for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
                         {
                             String[] buttonTypeAndValue = sr.ReadLine().Split(',');
-                            layouts[i].setValueofButton(buttonIndex,Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]); 
+                            layouts[i].setValueofButton(buttonIndex, Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]);
                         }
-                        
+
 
                     }
                 }
@@ -87,31 +87,20 @@ namespace WpfApp2
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
- 
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            ConfigWindow configWindow = new ConfigWindow();
-            configWindow.Show();
-        }
 
         private void remoteButtonClick(object sender, RoutedEventArgs e)
         {
-            if(listBox.SelectedIndex < 0)
+            if (listBox.SelectedIndex < 0)
             {
                 MessageBox.Show("Please select Layout");
                 return;
-            }  
+            }
             var button = sender as Button;
             String buttonName = button.Name.ToString();
-            int buttonIndex = buttonName[buttonName.Length-1] - '0';
+            int buttonIndex = buttonName[buttonName.Length - 1] - '0';
             int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
             PromptBox obj = new PromptBox();
-            obj.Title = "Button Config Window of Button :" + (buttonIndex+1);
+            obj.Title = "Button Config Window of Button :" + (buttonIndex + 1);
             switch (buttonType)
             {
 
@@ -143,12 +132,12 @@ namespace WpfApp2
                     break;
                 case 3:
                     // letter/Text and Media selected case
-                     buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
-                     splitedvalues = buttonValue.Split('+');
-                     obj.mediaCombobox.Text = splitedvalues[0];
-                     obj.letterTextbox.Text = splitedvalues[1];
-                     obj.letterCheckbox.IsChecked = true;
-                     obj.mediaCheckbox.IsChecked = true;
+                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    splitedvalues = buttonValue.Split('+');
+                    obj.mediaCombobox.Text = splitedvalues[0];
+                    obj.letterTextbox.Text = splitedvalues[1];
+                    obj.letterCheckbox.IsChecked = true;
+                    obj.mediaCheckbox.IsChecked = true;
                     break;
             }
             obj.Show();
@@ -157,7 +146,7 @@ namespace WpfApp2
         private void removeSelectedLayoutItem(object sender, RoutedEventArgs e)
         {
             //String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
-            if(listBox.SelectedIndex < 0)
+            if (listBox.SelectedIndex < 0)
             {
                 MessageBox.Show("Please Select Layout");
                 return;
@@ -176,7 +165,7 @@ namespace WpfApp2
 
         private void layoutSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (listBox.SelectedIndex > 0)
+            if (listBox.SelectedIndex > -1)
             {
                 String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
                 String[] color = selectedItem.Split(',');
@@ -195,25 +184,71 @@ namespace WpfApp2
             StreamWriter streamWriter = new StreamWriter(Constants.pathOut);
             streamWriter.WriteLine(this.layouts.Count);
 
-            foreach(Layout layout in layouts)
+            foreach (Layout layout in layouts)
             {
                 streamWriter.WriteLine(layout.getLayoutName());
-                streamWriter.WriteLine(layout.getR()+","+ layout.getG() + ","+layout.getB());
+                streamWriter.WriteLine(layout.getR() + "," + layout.getG() + "," + layout.getB());
                 for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
                 {
-                    streamWriter.WriteLine(layout.getTypeOfButton(buttonIndex) + ","+ layout.getValueofButton(buttonIndex));
+                    streamWriter.WriteLine(layout.getTypeOfButton(buttonIndex) + "," + layout.getValueofButton(buttonIndex));
                 }
 
             }
             streamWriter.Close();
-            createHIDaction();
+            createArdiunoFile();
 
             MessageBox.Show("Saved");
         }
 
-        private void createHIDaction()
+        private void createArdiunoFile()
         {
             StreamWriter stream = new StreamWriter(Constants.pathUno);
+            stream.WriteLine(createLoadConfig());
+            stream.WriteLine("\n" + createCurrentConf());
+            createHIDaction(stream);
+
+        }
+
+        private String createCurrentConf()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("//----------------------\n");
+            for (int i = 0; i < layouts.Count; i++)
+            {
+
+                // Color R
+                stringBuilder.Append("currentConf[" + (4 * i + 1) + "]");
+                stringBuilder.Append(" = ");
+                stringBuilder.Append(layouts[i].getR() + ";\n");
+
+                // Color G
+                stringBuilder.Append("currentConf[" + (4 * i + 2) + "]");
+                stringBuilder.Append(" = ");
+                stringBuilder.Append(layouts[i].getG() + ";\n");
+
+                // Color B
+                stringBuilder.Append("currentConf[" + (4 * i + 3) + "]");
+                stringBuilder.Append(" = ");
+                stringBuilder.Append(layouts[i].getB() + ";\n");
+
+            }
+            stringBuilder.Append("//----------------------\n\n");
+            return stringBuilder.ToString();
+
+
+        }
+
+        private String createLoadConfig()
+        {
+            return ("void loadConfig() { \n" +
+                        "\tfor (int i = 0 ; i < 32 ; i++) { \n" +
+                            "\t\tcurrentConf[i * 4] = i;\n" +
+                        "\t}\n" +
+                    "}");
+        }
+
+        private void createHIDaction(StreamWriter stream)
+        {
             stream.WriteLine("void HIDaction(byte input) { \n\t byte mode = input >> 3; \n\t byte button = input & 0b00000111;");
             int numberOfLayouts = layouts.Count;
             String switchVar = "mode";
@@ -221,15 +256,15 @@ namespace WpfApp2
             stream.WriteLine("\n}");
             stream.Close();
 
-           
+
         }
 
-        private String createSwitchCase(int numberOfCases, string switchVar)
+        private String createSwitchCase(int numberOfLayouts, string switchVar)
         {
             StringBuilder switchCase = new StringBuilder();
 
             switchCase.Append("\n\tswitch(" + switchVar + ")" + " {");
-            for (int i = 1; i < numberOfCases + 1; i++)
+            for (int i = 0; i < numberOfLayouts; i++)
             {
                 switchCase.Append("\n\t\tcase " + i + ":");
                 //add function to add cmds
@@ -244,7 +279,7 @@ namespace WpfApp2
         {
             StringBuilder caseCodeForLayout = new StringBuilder();
             caseCodeForLayout.Append("\n\t\t\tswitch(" + "button" + ")" + " {");
-            for (int i = 1; i <= 7; i++)
+            for (int i = 0; i < 6; i++)
             {
                 caseCodeForLayout.Append("\n\t\t\t\tcase " + i + ":");
                 caseCodeForLayout.Append(getButtonCaseCode(layoutNumber, i));
@@ -256,9 +291,38 @@ namespace WpfApp2
             return caseCodeForLayout.ToString();
         }
 
-        private String getButtonCaseCode(object layoutNumber, int i)
+        private String getButtonCaseCode(int layoutNumber, int buttonIndex)
         {
-            return "Nirav";
+            int buttonType = layouts[layoutNumber].getTypeOfButton(buttonIndex);
+            switch (buttonType)
+            {
+                case 0:
+                    String[] holdCmds = layouts[layoutNumber].getValueofButton(buttonIndex).ToUpper().Replace(' ', '_').Split('+');
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (String holdCmd in holdCmds)
+                    {
+                        if (!String.IsNullOrEmpty(holdCmd))
+                            stringBuilder.Append("\n\t\t\t\t" + "Keyboard.press(" + holdCmd + ");");
+                    }
+                    if (holdCmds.Length > 0)
+                    {
+                        stringBuilder.Append("\n\t\t\t\t" + "Keyboard.releaseAll();");
+                    }
+                    return stringBuilder.ToString();
+
+                case 1:
+                    return ("\n\t\t\t\t" + "Keyboard.print(\"" + layouts[layoutNumber].getValueofButton(buttonIndex) + "\");\n");
+                case 2:
+                    String mediaCmd = layouts[layoutNumber].getValueofButton(buttonIndex).ToUpper().Replace(' ', '_');
+                    return ("\n\t\t\t\t" + "Consumer.write(" + mediaCmd + ");\n");
+
+                case 3:
+                    break;
+                case -1:
+
+                    return "\n\t\t\t\t" + "//Button Not Configured\n";
+            }
+            return "";
         }
     }
 }
