@@ -41,8 +41,10 @@ namespace WpfApp2
         {
             foreach (var layout in layouts)
             {
-                listBox.Items.Add(layout.getLayoutName() + "," + layout.getR() + "," + layout.getG() + "," + layout.getB());
+                listBox.Items.Add(layout.getLayoutName());
             }
+            for(int i =  0; i < 1000; i++)
+                comPortCombo.Items.Add(i);
         }
 
         private void InitFromFile()
@@ -158,9 +160,15 @@ namespace WpfApp2
 
         private void addLayout(object sender, RoutedEventArgs e)
         {
-            CreateWindow createWindow = new CreateWindow();
-            createWindow.Show();
-
+            if (layouts.Count > 32)
+            {
+                MessageBox.Show("Only 32 layouts Allowed");
+            }
+            else
+            {
+                CreateWindow createWindow = new CreateWindow();
+                createWindow.Show();
+            }
         }
 
         private void layoutSelected(object sender, SelectionChangedEventArgs e)
@@ -169,11 +177,9 @@ namespace WpfApp2
             {
                 String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
                 String[] color = selectedItem.Split(',');
-                byte R = Convert.ToByte(color[1]);
-                byte G = Convert.ToByte(color[2]);
-                byte B = Convert.ToByte(color[3]);
-
-                //MessageBox.Show("R" +R + "G" + G + "B" + B);
+                byte R = Convert.ToByte(layouts[listBox.SelectedIndex].getR());
+                byte G = Convert.ToByte(layouts[listBox.SelectedIndex].getG());
+                byte B = Convert.ToByte(layouts[listBox.SelectedIndex].getB());
 
                 buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
             }
@@ -279,7 +285,7 @@ namespace WpfApp2
         {
             StringBuilder caseCodeForLayout = new StringBuilder();
             caseCodeForLayout.Append("\n\t\t\tswitch(" + "button" + ")" + " {");
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 caseCodeForLayout.Append("\n\t\t\t\tcase " + i + ":");
                 caseCodeForLayout.Append(getButtonCaseCode(layoutNumber, i));

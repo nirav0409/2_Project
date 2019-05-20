@@ -15,8 +15,8 @@ namespace WpfApp2
         int layoutIndex;
         public Layout()
         {
-           buttonValues = new ButtonValues[6];
-            for(int i = 0; i < 6; i++)
+           buttonValues = new ButtonValues[7];
+            for(int i = 0; i < 7; i++)
             {
                 buttonValues[i] = new ButtonValues();
             }
