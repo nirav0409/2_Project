@@ -30,7 +30,35 @@ namespace WpfApp2
             InitializeComponent();
             InitFromFile();
             InitUI();
+            initFilepaths();
 
+        }
+
+        private void initFilepaths()
+        {
+            if (File.Exists(".config"))
+            {
+                StreamReader stream = new StreamReader(".config");
+                String line = stream.ReadLine();
+
+                if (String.IsNullOrEmpty(line))
+                {
+                    stream.Close();
+                    Settings settings = new Settings();
+                    settings.Show();
+                }
+                else
+                {
+                    String[] map = line.Split('=');
+                    Constants.ardiunoDir = map[1];
+                }
+                stream.Close();
+            }
+            else
+            {
+                Settings settings = new Settings();
+                settings.Show();
+            }
         }
 
         public List<Layout> GetLayout()
@@ -43,8 +71,7 @@ namespace WpfApp2
             {
                 listBox.Items.Add(layout.getLayoutName());
             }
-            for(int i =  0; i < 1000; i++)
-                comPortCombo.Items.Add(i);
+            
         }
 
         private void InitFromFile()
@@ -329,6 +356,54 @@ namespace WpfApp2
                     return "\n\t\t\t\t" + "//Button Not Configured\n";
             }
             return "";
+        }
+
+        private void uploadButtonClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process process = new Process();
+                String cmd = "arduino_debug --upload --port COM9 "+ Constants.pathUno;
+                /*process.StartInfo.FileName = cmd;
+                process.StartInfo.WorkingDirectory = Constants.ardiunoDir;
+                process.StartInfo.Arguments = Constants.pathUno;
+                process.Start()*/
+                Debug.WriteLine(cmd);
+
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                        new System.Diagnostics.ProcessStartInfo("cmd", "/c " + cmd);
+
+                // The following commands are needed to redirect the standard output.
+                // This means that it will be redirected to the Process.StandardOutput StreamReader.
+                procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.UseShellExecute = false;
+                procStartInfo.WorkingDirectory = Constants.ardiunoDir;
+                // Do not create the black window.
+                procStartInfo.CreateNoWindow = true;
+                // Now we create a process, assign its ProcessStartInfo and start it
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                // Get the output into a string
+                string result = proc.StandardOutput.ReadToEnd();
+                // Display the command output.
+                Debug.WriteLine(result);
+
+
+
+
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+        }
+
+        private void settingsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.Show();
         }
     }
 }

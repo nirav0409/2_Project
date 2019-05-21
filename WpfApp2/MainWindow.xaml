@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="MainWindow" Height="450" Width="600">
     <Grid>
         <Grid  x:Name="buttonGrid" Margin="334,0,0,0">
             <Button x:Name="Button1"  Content="" HorizontalAlignment="Left" Margin="96,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
@@ -52,16 +52,21 @@
                     <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
+            <Button x:Name="settingsButton" Content="" HorizontalAlignment="Left" Margin="222,7,0,0" VerticalAlignment="Top" Width="20" Height="21" BorderThickness="0" Opacity="0.5" Click="settingsButtonClicked">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/settings.ico"/>
+                </Button.Background>
+            </Button>
         </Grid>
         <Grid  x:Name="mainGrid" Height="400" Width="313" HorizontalAlignment="Left"  Margin="-1,-2,0,-29" VerticalAlignment="Top">
-            <Label Content="Label" HorizontalAlignment="Left" Margin="21,367,0,0" VerticalAlignment="Top"/>
-            <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0">
+            <Label Content="COM Port " HorizontalAlignment="Left" Margin="170,347,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>
+            <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="104,292,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0">
+            <Button Content="" HorizontalAlignment="Left" Margin="116,290,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0" Height="29">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
@@ -69,8 +74,8 @@
             <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="250" Margin="40,37,0,0" VerticalAlignment="Top" Width="228" SelectionChanged="layoutSelected">
             </ListBox>
             <Button Content="Save" HorizontalAlignment="Left" Margin="12,326,0,0" VerticalAlignment="Top" Width="75" Click="saveButtonClicked"/>
-            <Button Content="Load" HorizontalAlignment="Left" Margin="97,326,0,0" VerticalAlignment="Top" Width="75"/>
-            <ComboBox x:Name="comPortCombo" HorizontalAlignment="Left" Margin="180,326,0,0" VerticalAlignment="Top" Width="40" IsEnabled="True"/>
+            <Button Content="Load" HorizontalAlignment="Left" Margin="94,326,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="175,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54"/>
 
         </Grid>
     </Grid>
