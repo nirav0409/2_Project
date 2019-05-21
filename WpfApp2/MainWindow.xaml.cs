@@ -232,7 +232,7 @@ namespace WpfApp2
             streamWriter.Close();
             createArdiunoFile();
 
-            MessageBox.Show("Saved");
+            MessageBox.Show("Saved\nLocation : " + Constants.pathOut);
         }
 
         private void createArdiunoFile()
