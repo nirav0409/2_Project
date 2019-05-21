@@ -25,7 +25,12 @@ namespace WpfApp2
         public Settings()
         {
             InitializeComponent();
+            if (!String.IsNullOrEmpty(Constants.ardiunoDir)) {
+                ardiunoPathTextBox.Text = Constants.ardiunoDir;
+            }
         }
+
+ 
 
         private void browseButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -49,6 +54,7 @@ namespace WpfApp2
                 StreamWriter stream = new StreamWriter(".config");
                 stream.WriteLine("ARDIUNO_PATH"+"="+ardiunoPathTextBox.Text);
                 stream.Close();
+                this.Close();
             }
         }
     }

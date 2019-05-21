@@ -13,9 +13,9 @@ namespace WpfApp2
         /// <summary>
         /// Media Constants
         /// </summary>
-        public static String path = "D:\\Nirav\\stateFile\\stateFile.txt";
-        public static String pathOut = "D:\\Nirav\\stateFile\\stateFile.txt";
-        public static String pathUno= "D:\\Nirav\\stateFile\\Conf.ino";
+        public static String path = System.AppDomain.CurrentDomain.BaseDirectory +"\\stateFile.txt";
+        public static String pathOut = System.AppDomain.CurrentDomain.BaseDirectory +"\\stateFile.txt";
+        public static String pathUno= System.AppDomain.CurrentDomain.BaseDirectory+ "\\Conf.ino";
         public static String ardiunoDir;
             //"C:\\Users\\Lenovo\\Downloads\\Arduino\\Arduino\\Arduino1.8.8\\arduino-1.8.8";
         public static int MEDIA_FAST_FORWARD = 0xB3;

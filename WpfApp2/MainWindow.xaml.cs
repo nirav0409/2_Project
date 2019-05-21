@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,7 +58,8 @@ namespace WpfApp2
             else
             {
                 Settings settings = new Settings();
-                settings.Show();
+                settings.Activate();
+                settings.ShowDialog();
             }
         }
 
@@ -360,22 +362,33 @@ namespace WpfApp2
 
         private void uploadButtonClicked(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(comPortBox.Text))
+            {
+                MessageBox.Show("Please Enter COM Port");
+            }
+            else
+            {
+                outputTextBlock.Text = "Running Command, Please Wait.....\n";
+                String port = comPortBox.Text;
+                Thread thread = new Thread(() => runCmd(port));
+                thread.Start();  
+            }
+        }
+
+        private void runCmd(String port)
+        {
             try
             {
-                Process process = new Process();
-                String cmd = "arduino_debug --upload --port COM9 "+ Constants.pathUno;
-                /*process.StartInfo.FileName = cmd;
-                process.StartInfo.WorkingDirectory = Constants.ardiunoDir;
-                process.StartInfo.Arguments = Constants.pathUno;
-                process.Start()*/
+                //outputTextBlock.Text = "Hello World";
+                String cmd = "arduino_debug --upload --port COM" + port + " " + Constants.pathUno;
                 Debug.WriteLine(cmd);
-
                 System.Diagnostics.ProcessStartInfo procStartInfo =
                         new System.Diagnostics.ProcessStartInfo("cmd", "/c " + cmd);
 
                 // The following commands are needed to redirect the standard output.
                 // This means that it will be redirected to the Process.StandardOutput StreamReader.
                 procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.RedirectStandardError = true;
                 procStartInfo.UseShellExecute = false;
                 procStartInfo.WorkingDirectory = Constants.ardiunoDir;
                 // Do not create the black window.
@@ -385,19 +398,28 @@ namespace WpfApp2
                 proc.StartInfo = procStartInfo;
                 proc.Start();
                 // Get the output into a string
-                string result = proc.StandardOutput.ReadToEnd();
-                // Display the command output.
-                Debug.WriteLine(result);
+                String line = "";
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    line = line + proc.StandardOutput.ReadToEnd();
+                }
+                while (!proc.StandardError.EndOfStream)
+                {
+                    line = line + proc.StandardError.ReadToEnd();
+                }
 
 
+
+                Dispatcher.BeginInvoke(new ThreadStart(() => outputTextBlock.Text = line.Trim()));
+
+                
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
             }
-
         }
 
         private void settingsButtonClicked(object sender, RoutedEventArgs e)
