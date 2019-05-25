@@ -69,6 +69,7 @@ namespace WpfApp2
         {
             return this.layouts;
         }
+
         private void InitUI()
         {
             foreach (var layout in layouts)
@@ -441,13 +442,43 @@ namespace WpfApp2
             {
                 case System.Windows.Forms.DialogResult.OK:
                     StreamReader stream = new StreamReader(fileDialog.FileName.ToString());
-                    //loadFromFile();
+                    loadFromFile(stream);
                     break;
                 case System.Windows.Forms.DialogResult.Cancel:
                 default:
                     MessageBox.Show("No File Selected");
                     break;
             }
+        }
+
+        private void loadFromFile(StreamReader stream)
+        {
+            List<Layout> layouts = new List<Layout>();
+            int numOfLayouts = Int32.Parse(stream.ReadLine());
+
+            for (int i = 0; i < numOfLayouts; i++)
+            {
+                layouts.Add(new Layout());
+                String layoutName = stream.ReadLine();
+                String[] colors = stream.ReadLine().Split(',');
+
+
+                layouts[i].setColor(Int32.Parse(colors[0]), Int32.Parse(colors[1]), Int32.Parse(colors[2]));
+                layouts[i].setLayoutIndex(i);
+                layouts[i].setLayoutName(layoutName);
+                for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                {
+                    String[] buttonTypeAndValue = stream.ReadLine().Split(',');
+                    layouts[i].setValueofButton(buttonIndex, Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]);
+                }
+
+
+            }
+            this.layouts = layouts;
+            listBox.Items.Clear();
+            InitUI();
+
+
         }
     }
 }

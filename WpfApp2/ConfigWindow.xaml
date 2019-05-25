@@ -8,7 +8,7 @@
         Title="ConfigWindow" Height="450" Width="350">
     <Grid>
         <Label Content="Label" HorizontalAlignment="Left" Margin="21,367,0,0" VerticalAlignment="Top"/>
-        <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="70"/>
         <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="Button_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
