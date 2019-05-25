@@ -72,8 +72,7 @@
             </Border>
         </Grid>
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
-            <Label Content="COM Port " HorizontalAlignment="Left" Margin="170,455,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="234,434,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>
+            <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="236,434,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>
             <Button Content="" HorizontalAlignment="Left" Margin="166,401,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
@@ -86,9 +85,9 @@
             </Button>
             <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="356" Margin="40,37,0,0" VerticalAlignment="Top" Width="228" SelectionChanged="layoutSelected">
             </ListBox>
-            <Button Content="Save" HorizontalAlignment="Left" Margin="12,434,0,0" VerticalAlignment="Top" Width="75" Click="saveButtonClicked"/>
-            <Button Content="Load" HorizontalAlignment="Left" Margin="94,434,0,0" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="175,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54"/>
+            <Button Content="Save" HorizontalAlignment="Left" Margin="5,434,0,0" VerticalAlignment="Top" Width="75" Click="saveButtonClicked"/>
+            <Button Content="Load" HorizontalAlignment="Left" Margin="85,434,0,0" VerticalAlignment="Top" Width="75" Click="loadButtonClicked"/>
+            <ComboBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="164,434,0,0"  VerticalAlignment="Top" Width="68"/>
 
         </Grid>
     </Grid>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,14 +33,15 @@ namespace WpfApp2
             InitFromFile();
             InitUI();
             initFilepaths();
+           // comPortBox.Items.Add("COM9");
 
         }
 
         private void initFilepaths()
         {
-            if (File.Exists(".config"))
+            if (File.Exists(Constants.pathConfig))
             {
-                StreamReader stream = new StreamReader(".config");
+                StreamReader stream = new StreamReader(Constants.pathConfig);
                 String line = stream.ReadLine();
 
                 if (String.IsNullOrEmpty(line))
@@ -73,7 +75,10 @@ namespace WpfApp2
             {
                 listBox.Items.Add(layout.getLayoutName());
             }
-            
+            string[] ports = SerialPort.GetPortNames();
+            foreach (String port in ports) { 
+            comPortBox.Items.Add(port);
+            }
         }
 
         private void InitFromFile()
@@ -216,7 +221,7 @@ namespace WpfApp2
 
         private void saveButtonClicked(object sender, RoutedEventArgs e)
         {
-            StreamWriter streamWriter = new StreamWriter(Constants.pathOut);
+            StreamWriter streamWriter = new StreamWriter(Constants.path);
             streamWriter.WriteLine(this.layouts.Count);
 
             foreach (Layout layout in layouts)
@@ -232,14 +237,13 @@ namespace WpfApp2
             streamWriter.Close();
             createArdiunoFile();
 
-            MessageBox.Show("Saved\nLocation : " + Constants.pathOut);
+            MessageBox.Show("Saved\nLocation : " + Constants.pathUno);
         }
 
         private void createArdiunoFile()
         {
             StreamWriter stream = new StreamWriter(Constants.pathUno);
             stream.WriteLine(createLoadConfig());
-            stream.WriteLine("\n" + createCurrentConf());
             createHIDaction(stream);
 
         }
@@ -279,7 +283,8 @@ namespace WpfApp2
                         "\tfor (int i = 0 ; i < 32 ; i++) { \n" +
                             "\t\tcurrentConf[i * 4] = i;\n" +
                         "\t}\n" +
-                    "}");
+                        createCurrentConf() +
+                      "}");
         }
 
         private void createHIDaction(StreamWriter stream)
@@ -380,7 +385,7 @@ namespace WpfApp2
             try
             {
                 //outputTextBlock.Text = "Hello World";
-                String cmd = "arduino_debug --upload --port COM" + port + " " + Constants.pathUno;
+                String cmd = "arduino_debug --upload --port " + port + " " + Constants.pathUno;
                 Debug.WriteLine(cmd);
                 System.Diagnostics.ProcessStartInfo procStartInfo =
                         new System.Diagnostics.ProcessStartInfo("cmd", "/c " + cmd);
@@ -426,6 +431,23 @@ namespace WpfApp2
         {
             Settings settings = new Settings();
             settings.Show();
+        }
+
+        private void loadButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new System.Windows.Forms.OpenFileDialog();
+            var result = fileDialog.ShowDialog();
+            switch (result)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    StreamReader stream = new StreamReader(fileDialog.FileName.ToString());
+                    //loadFromFile();
+                    break;
+                case System.Windows.Forms.DialogResult.Cancel:
+                default:
+                    MessageBox.Show("No File Selected");
+                    break;
+            }
         }
     }
 }

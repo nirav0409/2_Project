@@ -51,7 +51,7 @@ namespace WpfApp2
             else
             {
                 Constants.ardiunoDir = ardiunoPathTextBox.Text;
-                StreamWriter stream = new StreamWriter(".config");
+                StreamWriter stream = new StreamWriter(Constants.pathConfig);
                 stream.WriteLine("ARDIUNO_PATH"+"="+ardiunoPathTextBox.Text);
                 stream.Close();
                 this.Close();

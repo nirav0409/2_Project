@@ -46,7 +46,7 @@ namespace WpfApp2
                 layout.setColor(R,G,B);
                 ((MainWindow)Application.Current.MainWindow).layouts.Add(layout);
                 ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(layoutName);
-
+                ((MainWindow)Application.Current.MainWindow).listBox.SelectedItem = ((MainWindow)Application.Current.MainWindow).listBox.Items.GetItemAt(((MainWindow)Application.Current.MainWindow).layouts.Count-1);
                 this.Close();
             }
             else {
