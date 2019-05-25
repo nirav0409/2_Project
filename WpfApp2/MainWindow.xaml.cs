@@ -33,35 +33,42 @@ namespace WpfApp2
             InitFromFile();
             InitUI();
             initFilepaths();
-           // comPortBox.Items.Add("COM9");
+            //comPortBox.Items.Add("COM9");
 
         }
 
         private void initFilepaths()
         {
-            if (File.Exists(Constants.pathConfig))
+            if (Directory.Exists(Constants.defaultardiunoDir))
             {
-                StreamReader stream = new StreamReader(Constants.pathConfig);
-                String line = stream.ReadLine();
-
-                if (String.IsNullOrEmpty(line))
-                {
-                    stream.Close();
-                    Settings settings = new Settings();
-                    settings.Show();
-                }
-                else
-                {
-                    String[] map = line.Split('=');
-                    Constants.ardiunoDir = map[1];
-                }
-                stream.Close();
+                Constants.ardiunoDir = Constants.defaultardiunoDir;
             }
             else
             {
-                Settings settings = new Settings();
-                settings.Activate();
-                settings.ShowDialog();
+                if (File.Exists(Constants.pathConfig))
+                {
+                    StreamReader stream = new StreamReader(Constants.pathConfig);
+                    String line = stream.ReadLine();
+
+                    if (String.IsNullOrEmpty(line))
+                    {
+                        stream.Close();
+                        Settings settings = new Settings();
+                        settings.Show();
+                    }
+                    else
+                    {
+                        String[] map = line.Split('=');
+                        Constants.ardiunoDir = map[1];
+                    }
+                    stream.Close();
+                }
+                else
+                {
+                    Settings settings = new Settings();
+                    settings.Activate();
+                    settings.ShowDialog();
+                }
             }
         }
 
@@ -168,13 +175,15 @@ namespace WpfApp2
 
                     break;
                 case 3:
-                    // letter/Text and Media selected case
+                    // Hold and Letter selected case
                     buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
                     splitedvalues = buttonValue.Split('+');
-                    obj.mediaCombobox.Text = splitedvalues[0];
-                    obj.letterTextbox.Text = splitedvalues[1];
+                    obj.holdCombo1.Text = splitedvalues[0];
+                    obj.holdCombo2.Text = splitedvalues[1];
+                    obj.holdCombo3.Text = splitedvalues[2];
+                    obj.letterTextbox.Text = splitedvalues[3];
                     obj.letterCheckbox.IsChecked = true;
-                    obj.mediaCheckbox.IsChecked = true;
+                    obj.holdCheckbox.IsChecked = true;
                     break;
             }
             obj.Show();
@@ -229,7 +238,7 @@ namespace WpfApp2
             {
                 streamWriter.WriteLine(layout.getLayoutName());
                 streamWriter.WriteLine(layout.getR() + "," + layout.getG() + "," + layout.getB());
-                for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                for (int buttonIndex = 0; buttonIndex < 7; buttonIndex++)
                 {
                     streamWriter.WriteLine(layout.getTypeOfButton(buttonIndex) + "," + layout.getValueofButton(buttonIndex));
                 }
@@ -338,6 +347,7 @@ namespace WpfApp2
             switch (buttonType)
             {
                 case 0:
+                    //Only Hold Button is Selected
                     String[] holdCmds = layouts[layoutNumber].getValueofButton(buttonIndex).ToUpper().Replace(' ', '_').Split('+');
                     StringBuilder stringBuilder = new StringBuilder();
                     foreach (String holdCmd in holdCmds)
@@ -352,15 +362,32 @@ namespace WpfApp2
                     return stringBuilder.ToString();
 
                 case 1:
+                    //Only Letter is Selected
+
                     return ("\n\t\t\t\t" + "Keyboard.print(\"" + layouts[layoutNumber].getValueofButton(buttonIndex) + "\");\n");
                 case 2:
+                    //Only Media is Selected
+
                     String mediaCmd = layouts[layoutNumber].getValueofButton(buttonIndex).ToUpper().Replace(' ', '_');
                     return ("\n\t\t\t\t" + "Consumer.write(" + mediaCmd + ");\n");
 
                 case 3:
-                    break;
-                case -1:
+                    //Hold and Letter is Selected
+                    String[] mixedCmd = layouts[layoutNumber].getValueofButton(buttonIndex).Split('+');
+                    StringBuilder mixedCmdBuilder = new StringBuilder();
+                    for(int i = 0; i < (mixedCmd.Length-1); i++)
+                    {
+                        if (!String.IsNullOrEmpty(mixedCmd[i]))
+                            mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.press(" + mixedCmd[i].ToUpper().Replace(' ','_') + ");");
+                    }
+                    mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.print(" + mixedCmd[mixedCmd.Length-1] + ");");
 
+                    if (mixedCmd.Length > 1)
+                    {
+                        mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.releaseAll();");
+                    }
+                    return mixedCmdBuilder.ToString();
+                case -1:
                     return "\n\t\t\t\t" + "//Button Not Configured\n";
             }
             return "";
@@ -374,7 +401,7 @@ namespace WpfApp2
             }
             else
             {
-                outputTextBlock.Text = "Running Command, Please Wait.....\n";
+                outputTextBlock.Text = "Running Command,This May Take 2-3 Minutes, Please Wait.....\n";
                 String port = comPortBox.Text;
                 Thread thread = new Thread(() => runCmd(port));
                 thread.Start();  
@@ -466,7 +493,7 @@ namespace WpfApp2
                 layouts[i].setColor(Int32.Parse(colors[0]), Int32.Parse(colors[1]), Int32.Parse(colors[2]));
                 layouts[i].setLayoutIndex(i);
                 layouts[i].setLayoutName(layoutName);
-                for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                for (int buttonIndex = 0; buttonIndex < 7; buttonIndex++)
                 {
                     String[] buttonTypeAndValue = stream.ReadLine().Split(',');
                     layouts[i].setValueofButton(buttonIndex, Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]);
@@ -477,6 +504,7 @@ namespace WpfApp2
             this.layouts = layouts;
             listBox.Items.Clear();
             InitUI();
+            this.buttonGrid.Background = Brushes.White;
 
 
         }

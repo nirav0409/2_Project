@@ -5,43 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="Remote Customizer" Height="550" Width="700">
+        Title="Remote Customizer" Height="550" Width="700" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275*"/>
             <ColumnDefinition Width="317*"/>
         </Grid.ColumnDefinitions>
-        <Grid  x:Name="buttonGrid" Margin="0" Grid.Column="1">
+        <Grid  x:Name="buttonGrid" Margin="10,0,0,-17"  Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="90*"/>
                 <RowDefinition Height="83*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Button1"  Content="" HorizontalAlignment="Left" Margin="157,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
+
+            <Button  x:Name="Button0" Content="1" Click="remoteButtonClick" Margin="72,157,243,68" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Button2" Content="" HorizontalAlignment="Left" Margin="239,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
+            <Button  x:Name="Button1" Content="2" Click="remoteButtonClick" Margin="157,157,158,68" RenderTransformOrigin="0.429,0.312" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Button3" Content="" HorizontalAlignment="Left" Margin="113,220,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
+            <Button  x:Name="Button2" Content="3" Click="remoteButtonClick" Margin="244,157,70,68" FontWeight="Bold" FontSize="18">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Button4" Content="" HorizontalAlignment="Left" Margin="202,219,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
+            <Button  x:Name="Button3" Content="4" Click="remoteButtonClick" Margin="111,215,204,10" RenderTransformOrigin="0.514,0.812" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Button0" Content="" HorizontalAlignment="Left" Margin="78,159,0,0" VerticalAlignment="Top" Width="46" Height="36" Click="remoteButtonClick" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
+            <Button  x:Name="Button4" Content="5" Click="remoteButtonClick" Margin="202,215,113,10" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="101,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
+
+            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="111,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill">
                         <ImageBrush.RelativeTransform>
@@ -65,12 +92,12 @@
                     <ImageBrush ImageSource="Images/settings.ico"/>
                 </Button.Background>
             </Button>
-            <Border BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="5,40,10,0" Grid.Row="1">
-                <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" Name="sv1" Margin="0,-2,-2,2">
-                    <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="335" Height="3094"  FontSize="11" FontFamily="Courier New"/>
+            <Border BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,40,0,0" Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="sv1" Margin="10,-2,-2,2">
+                    <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
                 </ScrollViewer>
             </Border>
-            
+
         </Grid>
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
             <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="236,434,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>

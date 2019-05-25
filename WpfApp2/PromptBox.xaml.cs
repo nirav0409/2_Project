@@ -96,7 +96,7 @@ namespace WpfApp2
             bool mediaChecked = (bool)mediaCheckbox.IsChecked;
 
             if ((!holdChecked & !letterChecked & !mediaChecked) || (holdChecked & letterChecked & mediaChecked)
-                || ((mediaChecked || letterChecked) & holdChecked))
+                || ((holdChecked || letterChecked) & mediaChecked))
             {
                 MessageBox.Show("Invalid Selection");
             }
@@ -136,13 +136,22 @@ namespace WpfApp2
 
             }
 
-            // media and letter is checked
-            if (mediaChecked & letterChecked & !(holdChecked))
+            // hold and letter is checked
+            if (holdChecked & letterChecked & !(mediaChecked))
             {
-                String mediaText = mediaCombobox.Text;
+                String text1 = holdCombo1.Text;
+                String text2 = holdCombo2.Text;
+                String text3 = holdCombo3.Text;
                 String letterText = letterTextbox.Text;
-                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 3, mediaText + "+" + letterText);
-                this.Close();
+                if (String.IsNullOrEmpty(letterText))
+                {
+                    MessageBox.Show("Please enter Letter Text");
+                }
+                else
+                {
+                    ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 3, text1 + "+" + text2 + "+" + text3 + "+" + letterText);
+                    this.Close();
+                }   
                 //  MessageBox.Show(mediaText + "+" + letterText);
 
             }

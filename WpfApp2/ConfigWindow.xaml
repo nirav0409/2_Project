@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ConfigWindow" Height="450" Width="350">
     <Grid>
+
         <Label Content="Label" HorizontalAlignment="Left" Margin="21,367,0,0" VerticalAlignment="Top"/>
         <Button Content="Upload" HorizontalAlignment="Left" Margin="234,326,0,0" VerticalAlignment="Top" Width="70"/>
         <Button Content="" HorizontalAlignment="Left" Margin="166,293,0,0" VerticalAlignment="Top"  Width="33" Click="Button_Click">
@@ -19,9 +20,6 @@
                 <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
             </Button.Background>
         </Button>
-        <ListBox HorizontalAlignment="Left" Height="250" Margin="39,33,0,0" VerticalAlignment="Top" Width="228">
-            <ListBoxItem Content="ListBoxItem"/>
-        </ListBox>
         <Button Content="Save" HorizontalAlignment="Left" Margin="12,326,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Load" HorizontalAlignment="Left" Margin="97,326,0,0" VerticalAlignment="Top" Width="75"/>
         <ComboBox HorizontalAlignment="Left" Margin="180,326,0,0" VerticalAlignment="Top" Width="40"/>
