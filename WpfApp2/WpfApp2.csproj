@@ -212,5 +212,14 @@
   <ItemGroup>
     <Resource Include="Images\roundButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\circle.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrows.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

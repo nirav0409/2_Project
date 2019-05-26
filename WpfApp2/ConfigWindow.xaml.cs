@@ -37,5 +37,15 @@ namespace WpfApp2
         {
 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void remoateButtonClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

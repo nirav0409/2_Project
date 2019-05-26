@@ -140,7 +140,16 @@ namespace WpfApp2
                 return;
             }
             var button = sender as Button;
-            String buttonName = button.Name.ToString();
+            String buttonName;
+            if (button != null)
+            {
+                buttonName = button.Name.ToString();
+            }
+            else
+            {
+                var canvas = sender as Canvas;
+                buttonName = canvas.Name.ToString();
+            }
             int buttonIndex = buttonName[buttonName.Length - 1] - '0';
             int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
             PromptBox obj = new PromptBox();
@@ -199,7 +208,8 @@ namespace WpfApp2
             }
             layouts.RemoveAt(listBox.SelectedIndex);
             listBox.Items.RemoveAt(listBox.SelectedIndex);
-            this.buttonGrid.Background = Brushes.White;
+            if (glowCanvas.Children != null)
+                glowCanvas.Children.Clear();
         }
 
         private void addLayout(object sender, RoutedEventArgs e)
@@ -225,7 +235,11 @@ namespace WpfApp2
                 byte G = Convert.ToByte(layouts[listBox.SelectedIndex].getG());
                 byte B = Convert.ToByte(layouts[listBox.SelectedIndex].getB());
 
-                buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+                //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+                Ellipse ellipse = new Ellipse() { Height = 120, Width = 120 };
+                ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+                ellipse.StrokeThickness = 5;
+                glowCanvas.Children.Add(ellipse);
             }
         }
 
@@ -504,9 +518,12 @@ namespace WpfApp2
             this.layouts = layouts;
             listBox.Items.Clear();
             InitUI();
-            this.buttonGrid.Background = Brushes.White;
+            if(glowCanvas.Children != null)
+                glowCanvas.Children.Clear();
+
 
 
         }
+
     }
 }

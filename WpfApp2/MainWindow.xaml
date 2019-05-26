@@ -11,7 +11,7 @@
             <ColumnDefinition Width="275*"/>
             <ColumnDefinition Width="317*"/>
         </Grid.ColumnDefinitions>
-        <Grid  x:Name="buttonGrid" Margin="10,0,0,-17"  Grid.Column="1">
+        <Grid  x:Name="buttonGrid" Margin="9,-2,1,-15" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="90*"/>
                 <RowDefinition Height="83*"/>
@@ -31,7 +31,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Ellipse Fill="White"  Stroke="Black" />
+                            <Ellipse   Fill="White"  Stroke="Black" />
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
@@ -67,27 +67,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-            <Button x:Name="Button5" Content="" HorizontalAlignment="Left" Margin="111,53,0,0" VerticalAlignment="Top" Width="67" Height="67" FlowDirection="RightToLeft" Click="remoteButtonClick" RenderTransformOrigin="0.5,0.5" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill">
-                        <ImageBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="1" ScaleX="1"/>
-                                <SkewTransform AngleY="0" AngleX="0"/>
-                                <RotateTransform Angle="0"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ImageBrush.RelativeTransform>
-                    </ImageBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="Button6" Content="" HorizontalAlignment="Left" Margin="202,53,0,0" VerticalAlignment="Top" Width="67" Height="67" BorderThickness="0" Click="remoteButtonClick" >
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/Rotate_Icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="settingsButton" Content="" HorizontalAlignment="Left" Margin="328,7,0,0" VerticalAlignment="Top" Width="20" Height="21" BorderThickness="0" Opacity="0.5" Click="settingsButtonClicked">
+            <Button x:Name="settingsButton" Content="" HorizontalAlignment="Left" Margin="326,16,0,0" VerticalAlignment="Top" Width="20" Height="21" BorderThickness="0" Opacity="0.5" Click="settingsButtonClicked">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/settings.ico"/>
                 </Button.Background>
@@ -97,6 +77,69 @@
                     <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
                 </ScrollViewer>
             </Border>
+            <Grid HorizontalAlignment="Left" Height="121" Margin="111,33,0,0" VerticalAlignment="Top" Width="133">
+
+                <Canvas x:Name="Button5" Margin="24,0,22,70" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="remoteButtonClick">
+
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Canvas.Top="25.311" Canvas.Left="0.5" Height="42.878" Stretch="Fill" Width="83" StrokeThickness="2" RenderTransformOrigin="0.521,0.288" Data="M0,20 A20,20,0,1,0,40,20">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.663" Y="0.501"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                        <Path.Fill>
+                            <ImageBrush ImageSource="Images/arrows.png">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="-0.2" ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="-0.2"/>
+                                        <RotateTransform Angle="528.69" CenterY="0.5" CenterX="-0.2"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Path.Fill>
+                    </Path>
+                </Canvas>
+                <Canvas x:Name="Button6" Margin="24,45,22,0"  RenderTransformOrigin="0.5,0.5" Height="53" VerticalAlignment="Top" MouseLeftButtonDown="remoteButtonClick">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+
+                    <Path Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Canvas.Top="25.061" Canvas.Left="2.510" Height="42.878" Stretch="Fill" Width="83" StrokeThickness="2" RenderTransformOrigin="0.521,0.288" Data="M0,20 A20,20,0,1,0,40,20">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.663" Y="0.501"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                        <Path.Fill>
+                            <ImageBrush ImageSource="Images/arrows.png">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="-0.2" ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="-0.2"/>
+                                        <RotateTransform Angle="528.69" CenterY="0.5" CenterX="-0.2"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Path.Fill>
+                    </Path>
+                </Canvas>
+                <Canvas x:Name="glowCanvas" HorizontalAlignment="Left" Height="120" Margin="6,-11,0,0" VerticalAlignment="Top" Width="120"/>
+
+            </Grid>
 
         </Grid>
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
