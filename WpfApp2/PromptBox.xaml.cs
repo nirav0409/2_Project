@@ -111,6 +111,7 @@ namespace WpfApp2
                 String text2 = holdCombo2.Text;
                 String text3 = holdCombo3.Text;
                ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 0, text1 + "+" + text2 + "+" + text3);
+                setToolTip(layoutIndex, buttonIndex);
                 this.Close();
                 //      MessageBox.Show(text1 + "+" + text2 + "+" + text3);
             }
@@ -120,6 +121,7 @@ namespace WpfApp2
             {
                 String text = letterTextbox.Text;
                 ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 1, text);
+                setToolTip(layoutIndex, buttonIndex);
                 this.Close();
 
                 //    MessageBox.Show(text);
@@ -131,6 +133,7 @@ namespace WpfApp2
             {
                 String text = mediaCombobox.Text;
                 ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 2, text);
+                setToolTip(layoutIndex, buttonIndex);
                 this.Close();
                 //  MessageBox.Show(text);
 
@@ -150,12 +153,20 @@ namespace WpfApp2
                 else
                 {
                     ((MainWindow)Application.Current.MainWindow).layouts[layoutIndex].setValueofButton(buttonIndex, 3, text1 + "+" + text2 + "+" + text3 + "+" + letterText);
+                    setToolTip(layoutIndex, buttonIndex);
                     this.Close();
                 }   
                 //  MessageBox.Show(mediaText + "+" + letterText);
 
             }
 
+        }
+        private void setToolTip(int layoutIndex, int buttonIndex)
+        {
+            if (buttonIndex > 4)
+                ((MainWindow)Application.Current.MainWindow).canvases[buttonIndex - 5].ToolTip = ((MainWindow)Application.Current.MainWindow).getTooltip(layoutIndex, buttonIndex);
+            else
+                ((MainWindow)Application.Current.MainWindow).buttons[buttonIndex].ToolTip = ((MainWindow)Application.Current.MainWindow).getTooltip(layoutIndex, buttonIndex);
         }
 
         private int getButtonIndex()

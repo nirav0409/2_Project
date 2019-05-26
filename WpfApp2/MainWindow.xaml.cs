@@ -26,10 +26,22 @@ namespace WpfApp2
     {
 
         public List<Layout> layouts;
+        public List<Button> buttons;
+        public List<Canvas> canvases;
 
         public MainWindow()
         {
             InitializeComponent();
+            buttons = new List<Button>();
+            canvases = new List<Canvas>();
+            buttons.Add(Button0);
+            buttons.Add(Button1);
+            buttons.Add(Button2);
+            buttons.Add(Button3);
+            buttons.Add(Button4);
+            canvases.Add(Button5);
+            canvases.Add(Button6);
+
             InitFromFile();
             InitUI();
             initFilepaths();
@@ -84,9 +96,15 @@ namespace WpfApp2
                 listBox.Items.Add(layout.getLayoutName());
             }
             string[] ports = SerialPort.GetPortNames();
-            foreach (String port in ports) { 
-            comPortBox.Items.Add(port);
+            foreach (String port in ports)
+            {
+                comPortBox.Items.Add(port);
             }
+            foreach (Button b in buttons)
+                b.ToolTip = "Select Layout";
+
+            foreach (Canvas c in canvases)
+                c.ToolTip = "Select Layout";
         }
 
         private void InitFromFile()
@@ -210,6 +228,12 @@ namespace WpfApp2
             listBox.Items.RemoveAt(listBox.SelectedIndex);
             if (glowCanvas.Children != null)
                 glowCanvas.Children.Clear();
+
+            foreach (Button b in buttons)
+                b.ToolTip = "Select Layout";
+
+            foreach (Canvas c in canvases)
+                c.ToolTip = "Select Layout";
         }
 
         private void addLayout(object sender, RoutedEventArgs e)
@@ -240,7 +264,64 @@ namespace WpfApp2
                 ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
                 ellipse.StrokeThickness = 5;
                 glowCanvas.Children.Add(ellipse);
+
+                //set tooltips
+                Button0.ToolTip = getTooltip(listBox.SelectedIndex, 0);
+                Button1.ToolTip = getTooltip(listBox.SelectedIndex, 1);
+                Button2.ToolTip = getTooltip(listBox.SelectedIndex, 2);
+                Button3.ToolTip = getTooltip(listBox.SelectedIndex, 3);
+                Button4.ToolTip = getTooltip(listBox.SelectedIndex, 4);
+                Button5.ToolTip = getTooltip(listBox.SelectedIndex, 5);
+                Button6.ToolTip = getTooltip(listBox.SelectedIndex, 6);
+
+
             }
+        }
+
+        public String getTooltip(int layoutIndex, int buttonIndex)
+        {
+            int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
+            switch (buttonType)
+            {
+                case -1:
+                    return "Button Not Configured";
+                case 0:
+                    //only hold case
+                    String [] holdcmds = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex).Split('+');
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for(int i = 0; i<holdcmds.Length; i++)
+                    {
+                        if (!String.IsNullOrEmpty(holdcmds[i]))
+                        {
+                            stringBuilder.Append(holdcmds[i]);
+                            if(i != holdcmds.Length - 1)
+                            {
+                                stringBuilder.Append(" + ");
+
+                            }
+                        }
+                    }
+                    return stringBuilder.ToString();
+                case 1:
+                    return layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                case 2:
+                    //one media case
+                    return layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                case 3:
+                    String[] mixedcmds = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex).Split('+');
+                    StringBuilder mixedCmdBuilder = new StringBuilder();
+                    for(int i = 0; i < mixedcmds.Length -1; i++)
+                    {
+                        if (!String.IsNullOrEmpty(mixedcmds[i]))
+                        {
+                            mixedCmdBuilder.Append(mixedcmds[i] + " + ");
+                        }
+                    }
+                    mixedCmdBuilder.Append(mixedcmds[mixedcmds.Length-1]);
+                    return mixedCmdBuilder.ToString();
+
+            }
+            return "";
         }
 
         private void saveButtonClicked(object sender, RoutedEventArgs e)
