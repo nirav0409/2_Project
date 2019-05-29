@@ -32,7 +32,7 @@ namespace WpfApp2
                                         "RIGHT ALT", "RIGHT GUI", "UP ARROW", "DOWN ARROW", "LEFT ARROW", "RIGHT ARROW",
                                         "BACKSPACE", "TAB", "RETURN", "ESC", "INSERT", "DELETE", "PAGE UP", "PAGE DOWN",
                                         "HOME", "END","CAPS LOCK", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9",
-                                        "F10", "F11", "F12", "F12" };
+                                        "F10", "F11", "F12" };
             for (int i = 0; i < holdArray.Length; i++)
             {
                 holdCombo1.Items.Add(holdArray[i]);

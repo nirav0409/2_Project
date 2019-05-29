@@ -448,7 +448,7 @@ namespace WpfApp2
                     foreach (String holdCmd in holdCmds)
                     {
                         if (!String.IsNullOrEmpty(holdCmd))
-                            stringBuilder.Append("\n\t\t\t\t" + "Keyboard.press(" + holdCmd + ");");
+                            stringBuilder.Append("\n\t\t\t\t" + "Keyboard.press(KEY_" + holdCmd + ");");
                     }
                     if (holdCmds.Length > 0)
                     {
@@ -473,7 +473,7 @@ namespace WpfApp2
                     for(int i = 0; i < (mixedCmd.Length-1); i++)
                     {
                         if (!String.IsNullOrEmpty(mixedCmd[i]))
-                            mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.press(" + mixedCmd[i].ToUpper().Replace(' ','_') + ");");
+                            mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.press(KEY_" + mixedCmd[i].ToUpper().Replace(' ','_') + ");");
                     }
                     mixedCmdBuilder.Append("\n\t\t\t\t" + "Keyboard.print(" + mixedCmd[mixedCmd.Length-1] + ");");
 
@@ -508,7 +508,7 @@ namespace WpfApp2
             try
             {
                 //outputTextBlock.Text = "Hello World";
-                String cmd = "arduino_debug --upload --port " + port + " " + Constants.pathUno;
+                String cmd = "arduino_debug --upload --port " + port + " \"" + Constants.pathUno+"\"";
                 Debug.WriteLine(cmd);
                 System.Diagnostics.ProcessStartInfo procStartInfo =
                         new System.Diagnostics.ProcessStartInfo("cmd", "/c " + cmd);
@@ -521,7 +521,7 @@ namespace WpfApp2
                 procStartInfo.WorkingDirectory = Constants.ardiunoDir;
                 // Do not create the black window.
                 procStartInfo.CreateNoWindow = true;
-                // Now we create a process, assign its ProcessStartInfo and start it
+                // Now we create a process, assign its Process StartInfo and start it
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo = procStartInfo;
                 proc.Start();
