@@ -5,4 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="ConfigWindow" Height="450" Width="350"/>
+        Title="ConfigWindow" Height="450" Width="350">
+    <Border BorderBrush="Black" HorizontalAlignment="Left" Height="356" Margin="0,0,0,0" VerticalAlignment="Top" Width="230">
+        <ScrollViewer x:Name="layoutViewer">
+            <StackPanel x:Name="layoutPanel" Height="1000" Width="230" MouseLeftButtonDown="myPreviewMouseLeftButtonDown" MouseLeftButtonUp="myPreviewMouseLeftButtonUp" Drop="myDrop" DragEnter="myDragEnter" MouseMove="myPreviewMouseMove" AllowDrop="True" />
+        </ScrollViewer>
+    </Border>
+</Window>

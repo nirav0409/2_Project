@@ -28,6 +28,7 @@ namespace WpfApp2
         public List<Layout> layouts;
         public List<Button> buttons;
         public List<Canvas> canvases;
+        public int selectedLayoutIndex;
 
         public MainWindow()
         {
@@ -45,6 +46,7 @@ namespace WpfApp2
             InitFromFile();
             InitUI();
             initFilepaths();
+            sp = this.layoutPanel;
             //comPortBox.Items.Add("COM9");
 
         }
@@ -91,9 +93,10 @@ namespace WpfApp2
 
         private void InitUI()
         {
-            foreach (var layout in layouts)
+
+            for(int i = 0; i < layouts.Count; i++)
             {
-                listBox.Items.Add(layout.getLayoutName());
+                layoutPanel.Children.Add(new Card(layouts[i],i));
             }
             string[] ports = SerialPort.GetPortNames();
             foreach (String port in ports)
@@ -105,6 +108,8 @@ namespace WpfApp2
 
             foreach (Canvas c in canvases)
                 c.ToolTip = "Select Layout";
+
+            selectedLayoutIndex = -1;
         }
 
         private void InitFromFile()
@@ -131,7 +136,7 @@ namespace WpfApp2
                         layouts[i].setColor(Int32.Parse(colors[0]), Int32.Parse(colors[1]), Int32.Parse(colors[2]));
                         layouts[i].setLayoutIndex(i);
                         layouts[i].setLayoutName(layoutName);
-                        for (int buttonIndex = 0; buttonIndex < 6; buttonIndex++)
+                        for (int buttonIndex = 0; buttonIndex < 7; buttonIndex++)
                         {
                             String[] buttonTypeAndValue = sr.ReadLine().Split(',');
                             layouts[i].setValueofButton(buttonIndex, Int32.Parse(buttonTypeAndValue[0]), buttonTypeAndValue[1]);
@@ -152,7 +157,7 @@ namespace WpfApp2
 
         private void remoteButtonClick(object sender, RoutedEventArgs e)
         {
-            if (listBox.SelectedIndex < 0)
+            if (selectedLayoutIndex < 0)
             {
                 MessageBox.Show("Please select Layout");
                 return;
@@ -169,7 +174,7 @@ namespace WpfApp2
                 buttonName = canvas.Name.ToString();
             }
             int buttonIndex = buttonName[buttonName.Length - 1] - '0';
-            int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
+            int buttonType = layouts[selectedLayoutIndex].getTypeOfButton(buttonIndex);
             PromptBox obj = new PromptBox();
             obj.Title = "Button Config Window of Button :" + (buttonIndex + 1);
             switch (buttonType)
@@ -180,7 +185,7 @@ namespace WpfApp2
                     break;
                 case 0:
                     //hold selected case
-                    String buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    String buttonValue = layouts[selectedLayoutIndex].getValueofButton(buttonIndex);
                     string[] splitedvalues = buttonValue.Split('+');
                     obj.holdCombo1.Text = splitedvalues[0];
                     obj.holdCombo2.Text = splitedvalues[1];
@@ -190,20 +195,20 @@ namespace WpfApp2
                     break;
                 case 1:
                     //letter/Text selected case
-                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    buttonValue = layouts[selectedLayoutIndex].getValueofButton(buttonIndex);
                     obj.letterTextbox.Text = buttonValue;
                     obj.letterCheckbox.IsChecked = true;
                     break;
                 case 2:
                     //Media selected case
-                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    buttonValue = layouts[selectedLayoutIndex].getValueofButton(buttonIndex);
                     obj.mediaCombobox.Text = buttonValue;
                     obj.mediaCheckbox.IsChecked = true;
 
                     break;
                 case 3:
                     // Hold and Letter selected case
-                    buttonValue = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    buttonValue = layouts[selectedLayoutIndex].getValueofButton(buttonIndex);
                     splitedvalues = buttonValue.Split('+');
                     obj.holdCombo1.Text = splitedvalues[0];
                     obj.holdCombo2.Text = splitedvalues[1];
@@ -218,14 +223,14 @@ namespace WpfApp2
 
         private void removeSelectedLayoutItem(object sender, RoutedEventArgs e)
         {
-            //String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
-            if (listBox.SelectedIndex < 0)
+            if (selectedLayoutIndex < 0)
             {
                 MessageBox.Show("Please Select Layout");
                 return;
             }
-            layouts.RemoveAt(listBox.SelectedIndex);
-            listBox.Items.RemoveAt(listBox.SelectedIndex);
+            layouts.RemoveAt(selectedLayoutIndex);
+            layoutPanel.Children.RemoveAt(selectedLayoutIndex);
+
             if (glowCanvas.Children != null)
                 glowCanvas.Children.Clear();
 
@@ -249,45 +254,17 @@ namespace WpfApp2
             }
         }
 
-        private void layoutSelected(object sender, SelectionChangedEventArgs e)
-        {
-            if (listBox.SelectedIndex > -1)
-            {
-                String selectedItem = listBox.Items[listBox.SelectedIndex].ToString();
-                String[] color = selectedItem.Split(',');
-                byte R = Convert.ToByte(layouts[listBox.SelectedIndex].getR());
-                byte G = Convert.ToByte(layouts[listBox.SelectedIndex].getG());
-                byte B = Convert.ToByte(layouts[listBox.SelectedIndex].getB());
-
-                //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-                Ellipse ellipse = new Ellipse() { Height = 120, Width = 120 };
-                ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
-                ellipse.StrokeThickness = 5;
-                glowCanvas.Children.Add(ellipse);
-
-                //set tooltips
-                Button0.ToolTip = getTooltip(listBox.SelectedIndex, 0);
-                Button1.ToolTip = getTooltip(listBox.SelectedIndex, 1);
-                Button2.ToolTip = getTooltip(listBox.SelectedIndex, 2);
-                Button3.ToolTip = getTooltip(listBox.SelectedIndex, 3);
-                Button4.ToolTip = getTooltip(listBox.SelectedIndex, 4);
-                Button5.ToolTip = getTooltip(listBox.SelectedIndex, 5);
-                Button6.ToolTip = getTooltip(listBox.SelectedIndex, 6);
-
-
-            }
-        }
 
         public String getTooltip(int layoutIndex, int buttonIndex)
         {
-            int buttonType = layouts[listBox.SelectedIndex].getTypeOfButton(buttonIndex);
+            int buttonType = layouts[layoutIndex].getTypeOfButton(buttonIndex);
             switch (buttonType)
             {
                 case -1:
                     return "Button Not Configured";
                 case 0:
                     //only hold case
-                    String [] holdcmds = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex).Split('+');
+                    String [] holdcmds = layouts[layoutIndex].getValueofButton(buttonIndex).Split('+');
                     StringBuilder stringBuilder = new StringBuilder();
                     for(int i = 0; i<holdcmds.Length; i++)
                     {
@@ -303,12 +280,12 @@ namespace WpfApp2
                     }
                     return stringBuilder.ToString();
                 case 1:
-                    return layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    return layouts[layoutIndex].getValueofButton(buttonIndex);
                 case 2:
                     //one media case
-                    return layouts[listBox.SelectedIndex].getValueofButton(buttonIndex);
+                    return layouts[layoutIndex].getValueofButton(buttonIndex);
                 case 3:
-                    String[] mixedcmds = layouts[listBox.SelectedIndex].getValueofButton(buttonIndex).Split('+');
+                    String[] mixedcmds = layouts[layoutIndex].getValueofButton(buttonIndex).Split('+');
                     StringBuilder mixedCmdBuilder = new StringBuilder();
                     for(int i = 0; i < mixedcmds.Length -1; i++)
                     {
@@ -493,6 +470,7 @@ namespace WpfApp2
             if (String.IsNullOrEmpty(comPortBox.Text))
             {
                 MessageBox.Show("Please Enter COM Port");
+                    
             }
             else
             {
@@ -597,13 +575,172 @@ namespace WpfApp2
 
             }
             this.layouts = layouts;
-            listBox.Items.Clear();
+            layoutPanel.Children.Clear();
             InitUI();
             if(glowCanvas.Children != null)
                 glowCanvas.Children.Clear();
 
 
 
+        }
+
+
+
+        ///new code
+        Boolean isDown, isDragging;
+        Point startPoint;
+        StackPanel sp;
+        UIElement realDragSource;
+        UIElement dummyDragSource = new UIElement();
+
+        private void myPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("PreviewMouseLeftButtonDown");
+            if (e.Source == this.sp)
+            {
+            }
+            else
+            {
+                isDown = true;
+                startPoint = e.GetPosition(this.sp);
+            }
+
+
+        }
+
+        private void myPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+            System.Diagnostics.Debug.WriteLine("PreviewMouseLeftButtonUp");
+            if (isDown == true && isDragging == false)
+            {
+
+                Card ex = (Card)(e.Source as UIElement);
+                System.Diagnostics.Debug.WriteLine("Mouse Click");
+                layoutSelected(layoutPanel.Children.IndexOf(ex));
+
+                
+            }
+            isDown = false;
+            isDragging = false;
+            if (realDragSource != null)
+            {
+                realDragSource.ReleaseMouseCapture();
+            }
+        }
+
+         public void layoutSelected(int layoutIndex)
+        {   
+            if(selectedLayoutIndex > -1)
+                ((Card)layoutPanel.Children[selectedLayoutIndex]).layoutName.FontWeight = FontWeights.Normal;
+            this.selectedLayoutIndex = layoutIndex;
+            ((Card)layoutPanel.Children[selectedLayoutIndex]).layoutName.FontWeight = FontWeights.Bold;
+            byte R = Convert.ToByte(layouts[selectedLayoutIndex].getR());
+            byte G = Convert.ToByte(layouts[selectedLayoutIndex].getG());
+            byte B = Convert.ToByte(layouts[selectedLayoutIndex].getB());
+
+            //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+            Ellipse ellipse = new Ellipse() { Height = 120, Width = 120 };
+            ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+            ellipse.StrokeThickness = 5;
+            glowCanvas.Children.Add(ellipse);
+
+            //set tooltips
+            Button0.ToolTip = getTooltip(selectedLayoutIndex, 0);
+            Button1.ToolTip = getTooltip(selectedLayoutIndex, 1);
+            Button2.ToolTip = getTooltip(selectedLayoutIndex, 2);
+            Button3.ToolTip = getTooltip(selectedLayoutIndex, 3);
+            Button4.ToolTip = getTooltip(selectedLayoutIndex, 4);
+            Button5.ToolTip = getTooltip(selectedLayoutIndex, 5);
+            Button6.ToolTip = getTooltip(selectedLayoutIndex, 6);
+        }
+        private void myPreviewMouseMove(object sender, MouseEventArgs e)
+        {
+           // Debug.WriteLine("PreViewMouseMove");
+            if (isDown)
+            {
+                if ((isDragging == false) && ((Math.Abs(e.GetPosition(this.sp).X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(e.GetPosition(this.sp).Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance)))
+                {
+                    isDragging = true;
+                    realDragSource = e.Source as UIElement;
+                    realDragSource.CaptureMouse();
+                    DragDrop.DoDragDrop(dummyDragSource, new DataObject("UIElement", e.Source, true), DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void myDragEnter(object sender, DragEventArgs e)
+        {
+            Debug.WriteLine("DragEnter");
+            if (e.Data.GetDataPresent("UIElement"))
+            {
+                e.Effects = DragDropEffects.Move;
+            }
+        }
+
+        private void editLayoutClicked(object sender, RoutedEventArgs e)
+        {
+            if (selectedLayoutIndex < 0) {
+
+                MessageBox.Show("Please Selecte Layout");
+            }
+            else
+            { 
+                CreateWindow createWindow = new CreateWindow(true);
+                createWindow.layoutNameTextBox.Text = layouts[selectedLayoutIndex].getLayoutName();
+                byte R = Convert.ToByte(layouts[selectedLayoutIndex].getR());
+                byte G = Convert.ToByte(layouts[selectedLayoutIndex].getG());
+                byte B = Convert.ToByte(layouts[selectedLayoutIndex].getB());
+
+                createWindow.colorPicker.SelectedColor = Color.FromRgb(R, G, B);
+                createWindow.Show();
+            }
+        }
+        
+        private void myDrop(object sender, DragEventArgs e)
+
+        {
+            Debug.WriteLine("Drop");
+            if (e.Data.GetDataPresent("UIElement"))
+            {
+                UIElement droptarget = e.Source as UIElement;
+                int droptargetIndex = -1, i = 0;
+                foreach (UIElement element in this.sp.Children)
+                {
+                    if (element.Equals(droptarget))
+                    {
+                        droptargetIndex = i;
+                        break;
+                    }
+                    i++;
+                }
+                if (droptargetIndex != -1)
+                {
+                    int layoutIndex = sp.Children.IndexOf(realDragSource);
+                    this.sp.Children.Remove(realDragSource);
+                    this.sp.Children.Insert(droptargetIndex, realDragSource);
+                    Layout layout = layouts[layoutIndex];
+                    this.layouts.Remove(layout);
+                    this.layouts.Insert(droptargetIndex, layout);
+                    if (selectedLayoutIndex == layoutIndex)
+                    {
+                        this.layoutSelected(droptargetIndex);
+                    } else if (droptargetIndex > layoutIndex && selectedLayoutIndex < droptargetIndex && selectedLayoutIndex > layoutIndex)
+                    {
+                        selectedLayoutIndex -= 1;
+                    }
+                    else if (droptargetIndex < layoutIndex && selectedLayoutIndex > droptargetIndex && selectedLayoutIndex < layoutIndex)
+                    {
+                        selectedLayoutIndex += 1;
+
+                    }
+                }
+
+                isDown = false;
+                isDragging = false;
+                realDragSource.ReleaseMouseCapture();
+            }
         }
 
     }

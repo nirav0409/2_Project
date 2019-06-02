@@ -73,7 +73,7 @@
                 </Button.Background>
             </Button>
             <Border BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,40,0,0" Grid.Row="1">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="sv1" Margin="10,-2,-2,2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="sv1" Margin="10,-2,-2,2" >
                     <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
                 </ScrollViewer>
             </Border>
@@ -144,21 +144,27 @@
         </Grid>
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
             <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="236,434,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="166,401,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
+            <Button Content="" HorizontalAlignment="Left" Margin="143,401,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="116,398,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0" Height="29">
+            <Button Content="" HorizontalAlignment="Left" Margin="95,398,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0" Height="29">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="356" Margin="40,37,0,0" VerticalAlignment="Top" Width="228" SelectionChanged="layoutSelected">
-            </ListBox>
+            <ScrollViewer x:Name="layoutViewer" Margin="40,37,45,128">
+                <StackPanel x:Name="layoutPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="1000" Width="230" MouseLeftButtonDown="myPreviewMouseLeftButtonDown" MouseLeftButtonUp="myPreviewMouseLeftButtonUp" Drop="myDrop" DragEnter="myDragEnter" MouseMove="myPreviewMouseMove" AllowDrop="True" />
+            </ScrollViewer>
             <Button Content="Save" HorizontalAlignment="Left" Margin="5,434,0,0" VerticalAlignment="Top" Width="75" Click="saveButtonClicked"/>
             <Button Content="Load" HorizontalAlignment="Left" Margin="85,434,0,0" VerticalAlignment="Top" Width="75" Click="loadButtonClicked"/>
             <ComboBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="164,434,0,0"  VerticalAlignment="Top" Width="68"/>
+            <Button HorizontalAlignment="Left" Margin="185,398,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.827,-3.45" Click="editLayoutClicked" Height="29" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/edit_icon.ico" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
     </Grid>

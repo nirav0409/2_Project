@@ -175,7 +175,7 @@ namespace WpfApp2
         }
         private int getLayoutIndex()
         {
-           return ((MainWindow)Application.Current.MainWindow).listBox.SelectedIndex;
+           return ((MainWindow)Application.Current.MainWindow).selectedLayoutIndex;
         }
         private void mediaUnchecked(object sender, RoutedEventArgs e)
         {

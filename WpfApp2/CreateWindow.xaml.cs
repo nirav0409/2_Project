@@ -20,9 +20,17 @@ namespace WpfApp2
     /// </summary>
     public partial class CreateWindow : Window
     {
+        Boolean editMode;
         public CreateWindow()
         {
             InitializeComponent();
+            editMode = false;
+        }
+
+     public CreateWindow(Boolean isEditMode)
+        {
+            InitializeComponent();
+            editMode = true;
         }
 
 
@@ -40,14 +48,26 @@ namespace WpfApp2
                 int R = colorPicker.SelectedColor.Value.R;
                 int G = colorPicker.SelectedColor.Value.G;
                 int B = colorPicker.SelectedColor.Value.B;
-               
-                Layout layout = new Layout();
-                layout.setLayoutName(layoutName);
-                layout.setColor(R,G,B);
-                ((MainWindow)Application.Current.MainWindow).layouts.Add(layout);
-                ((MainWindow)Application.Current.MainWindow).listBox.Items.Add(layoutName);
-                ((MainWindow)Application.Current.MainWindow).listBox.SelectedItem = ((MainWindow)Application.Current.MainWindow).listBox.Items.GetItemAt(((MainWindow)Application.Current.MainWindow).layouts.Count-1);
-                this.Close();
+                if (editMode)
+                {
+                    int selectedIndex = ((MainWindow)Application.Current.MainWindow).selectedLayoutIndex;
+                    ((MainWindow)Application.Current.MainWindow).layouts[selectedIndex].setLayoutName(layoutName);
+                    ((MainWindow)Application.Current.MainWindow).layouts[selectedIndex].setColor(R, G, B);
+                    ((Card)((MainWindow)Application.Current.MainWindow).layoutPanel.Children[selectedIndex]).setLayoutName(layoutName);
+                    ((Card)((MainWindow)Application.Current.MainWindow).layoutPanel.Children[selectedIndex]).setLayoutColor(R,G,B);
+                    ((MainWindow)Application.Current.MainWindow).layoutSelected(selectedIndex);
+
+                }
+                else
+                {
+                    Layout layout = new Layout();
+                    layout.setLayoutName(layoutName);
+                    layout.setColor(R, G, B);
+                    ((MainWindow)Application.Current.MainWindow).layouts.Add(layout);
+                    MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                    ((MainWindow)Application.Current.MainWindow).layoutPanel.Children.Add(new Card(layout, mainWindow.layouts.Count - 1));
+                    ((MainWindow)Application.Current.MainWindow).layoutSelected(mainWindow.layouts.Count - 1);
+                } this.Close();
             }
             else {
                 MessageBox.Show("Please check Color or Name");
