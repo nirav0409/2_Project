@@ -726,11 +726,11 @@ namespace WpfApp2
                     if (selectedLayoutIndex == layoutIndex)
                     {
                         this.layoutSelected(droptargetIndex);
-                    } else if (droptargetIndex > layoutIndex && selectedLayoutIndex < droptargetIndex && selectedLayoutIndex > layoutIndex)
+                    } else if (droptargetIndex > layoutIndex && selectedLayoutIndex <= droptargetIndex && selectedLayoutIndex > layoutIndex)
                     {
                         selectedLayoutIndex -= 1;
                     }
-                    else if (droptargetIndex < layoutIndex && selectedLayoutIndex > droptargetIndex && selectedLayoutIndex < layoutIndex)
+                    else if (droptargetIndex < layoutIndex && selectedLayoutIndex >= droptargetIndex && selectedLayoutIndex < layoutIndex)
                     {
                         selectedLayoutIndex += 1;
 
