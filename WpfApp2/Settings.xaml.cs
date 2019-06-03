@@ -25,8 +25,8 @@ namespace WpfApp2
         public Settings()
         {
             InitializeComponent();
-            if (!String.IsNullOrEmpty(Constants.ardiunoDir)) {
-                ardiunoPathTextBox.Text = Constants.ardiunoDir;
+            if (!String.IsNullOrEmpty(Constants.exportPath)) {
+                ardiunoPathTextBox.Text = Constants.exportPath;
             }
         }
 
@@ -38,7 +38,7 @@ namespace WpfApp2
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if(result.ToString() == "OK")
             {
-                ardiunoPathTextBox.Text = dialog.SelectedPath;
+                ardiunoPathTextBox.Text = dialog.SelectedPath + "\\Export";
             }
         }
 
@@ -50,9 +50,9 @@ namespace WpfApp2
             }
             else
             {
-                Constants.ardiunoDir = ardiunoPathTextBox.Text;
+                Constants.exportPath = ardiunoPathTextBox.Text;
                 StreamWriter stream = new StreamWriter(Constants.pathConfig);
-                stream.WriteLine("ARDIUNO_PATH"+"="+ardiunoPathTextBox.Text);
+                stream.WriteLine("EXPORT_PATH"+"="+ardiunoPathTextBox.Text);
                 stream.Close();
                 this.Close();
             }

@@ -27,6 +27,7 @@ namespace WpfApp2
 
         public List<Layout> layouts;
         public List<Button> buttons;
+        public List<Label> bLabels;
         public List<Canvas> canvases;
         public int selectedLayoutIndex;
 
@@ -35,6 +36,7 @@ namespace WpfApp2
             InitializeComponent();
             buttons = new List<Button>();
             canvases = new List<Canvas>();
+            bLabels = new List<Label>();
             buttons.Add(Button0);
             buttons.Add(Button1);
             buttons.Add(Button2);
@@ -42,6 +44,14 @@ namespace WpfApp2
             buttons.Add(Button4);
             canvases.Add(Button5);
             canvases.Add(Button6);
+
+            bLabels.Add(bLabel0);
+            bLabels.Add(bLabel1);
+            bLabels.Add(bLabel2);
+            bLabels.Add(bLabel3);
+            bLabels.Add(bLabel4);
+            bLabels.Add(bLabel5);
+            bLabels.Add(bLabel6);
 
             InitFromFile();
             InitUI();
@@ -57,8 +67,8 @@ namespace WpfApp2
             {
                 Constants.ardiunoDir = Constants.defaultardiunoDir;
             }
-            else
-            {
+            
+            
                 if (File.Exists(Constants.pathConfig))
                 {
                     StreamReader stream = new StreamReader(Constants.pathConfig);
@@ -73,17 +83,11 @@ namespace WpfApp2
                     else
                     {
                         String[] map = line.Split('=');
-                        Constants.ardiunoDir = map[1];
+                        Constants.exportPath = map[1];
                     }
                     stream.Close();
                 }
-                else
-                {
-                    Settings settings = new Settings();
-                    settings.Activate();
-                    settings.ShowDialog();
-                }
-            }
+            
         }
 
         public List<Layout> GetLayout()
@@ -105,7 +109,8 @@ namespace WpfApp2
             }
             foreach (Button b in buttons)
                 b.ToolTip = "Select Layout";
-
+            foreach (Label l in bLabels)
+                l.Content = "";
             foreach (Canvas c in canvases)
                 c.ToolTip = "Select Layout";
 
@@ -236,6 +241,8 @@ namespace WpfApp2
 
             foreach (Button b in buttons)
                 b.ToolTip = "Select Layout";
+            foreach (Label l in bLabels)
+                l.Content = "";
 
             foreach (Canvas c in canvases)
                 c.ToolTip = "Select Layout";
@@ -261,7 +268,7 @@ namespace WpfApp2
             switch (buttonType)
             {
                 case -1:
-                    return "Button Not Configured";
+                    return "Not Configured";
                 case 0:
                     //only hold case
                     String [] holdcmds = layouts[layoutIndex].getValueofButton(buttonIndex).Split('+');
@@ -317,14 +324,14 @@ namespace WpfApp2
 
             }
             streamWriter.Close();
-            createArdiunoFile();
+            createArdiunoFile(Constants.pathUno);
 
             MessageBox.Show("Saved\nLocation : " + Constants.pathUno);
         }
 
-        private void createArdiunoFile()
+        private void createArdiunoFile(String path)
         {
-            StreamWriter stream = new StreamWriter(Constants.pathUno);
+            StreamWriter stream = new StreamWriter(path);
             stream.WriteLine(createLoadConfig());
             createHIDaction(stream);
 
@@ -640,11 +647,11 @@ namespace WpfApp2
             byte B = Convert.ToByte(layouts[selectedLayoutIndex].getB());
 
             //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-            Ellipse ellipse = new Ellipse() { Height = 120, Width = 120 };
+            Ellipse ellipse = new Ellipse() { Height = 107, Width = 107 };
             ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
             ellipse.StrokeThickness = 5;
             glowCanvas.Children.Add(ellipse);
-
+            
             //set tooltips
             Button0.ToolTip = getTooltip(selectedLayoutIndex, 0);
             Button1.ToolTip = getTooltip(selectedLayoutIndex, 1);
@@ -653,6 +660,16 @@ namespace WpfApp2
             Button4.ToolTip = getTooltip(selectedLayoutIndex, 4);
             Button5.ToolTip = getTooltip(selectedLayoutIndex, 5);
             Button6.ToolTip = getTooltip(selectedLayoutIndex, 6);
+
+            for (int i = 0; i < bLabels.Count; i++) { 
+                String tt = getTooltip(selectedLayoutIndex, i);
+                if (tt.Length > 16)
+                    bLabels[i].Content = tt.Substring(0, 15);
+                else
+                    bLabels[i].Content = tt;
+            }
+
+
         }
         private void myPreviewMouseMove(object sender, MouseEventArgs e)
         {
@@ -697,7 +714,53 @@ namespace WpfApp2
                 createWindow.Show();
             }
         }
-        
+
+        private void exportButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (!Directory.Exists(Constants.exportPath))
+            {
+                //create folder picker and save the data
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                if (result.ToString() == "OK")
+                {
+                    Constants.exportPath = dialog.SelectedPath+ "\\Export";
+                    StreamWriter stream = new StreamWriter(Constants.pathConfig);
+                    stream.WriteLine("EXPORT_PATH" + "=" + Constants.exportPath);
+                    stream.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please Select the Path");
+                    return;
+                }
+
+            }
+            if(!Directory.Exists(Constants.exportPath))
+            {
+                Directory.CreateDirectory(Constants.exportPath);
+            }
+ 
+
+            StreamWriter streamWriter = new StreamWriter(Constants.exportPath + "\\stateFile.txt");
+            streamWriter.WriteLine(this.layouts.Count);
+
+            foreach (Layout layout in layouts)
+            {
+                streamWriter.WriteLine(layout.getLayoutName());
+                streamWriter.WriteLine(layout.getR() + "," + layout.getG() + "," + layout.getB());
+                for (int buttonIndex = 0; buttonIndex < 7; buttonIndex++)
+                {
+                    streamWriter.WriteLine(layout.getTypeOfButton(buttonIndex) + "," + layout.getValueofButton(buttonIndex));
+                }
+
+            }
+            streamWriter.Close();
+            createArdiunoFile(Constants.exportPath + "\\conf.ino");
+
+            MessageBox.Show("Saved\nLocation : " + Constants.exportPath);
+        }
+
         private void myDrop(object sender, DragEventArgs e)
 
         {

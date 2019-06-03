@@ -163,6 +163,13 @@ namespace WpfApp2
         }
         private void setToolTip(int layoutIndex, int buttonIndex)
         {
+            String tt =((MainWindow)Application.Current.MainWindow).getTooltip(layoutIndex, buttonIndex);
+
+            if (tt.Length > 16)
+                ((MainWindow)Application.Current.MainWindow).bLabels[buttonIndex].Content = tt.Substring(0, 15);
+            else
+                ((MainWindow)Application.Current.MainWindow).bLabels[buttonIndex].Content = tt;
+
             if (buttonIndex > 4)
                 ((MainWindow)Application.Current.MainWindow).canvases[buttonIndex - 5].ToolTip = ((MainWindow)Application.Current.MainWindow).getTooltip(layoutIndex, buttonIndex);
             else

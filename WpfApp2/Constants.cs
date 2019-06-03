@@ -16,6 +16,8 @@ namespace WpfApp2
         public static String path = System.AppDomain.CurrentDomain.BaseDirectory+"config" +"\\stateFile.txt";
         public static String pathConfig = System.AppDomain.CurrentDomain.BaseDirectory + "config" + "\\.config";
         public static String pathUno = System.AppDomain.CurrentDomain.BaseDirectory +"Receiver" +"\\Conf.ino";
+        public static String exportPath;
+
         public static String ardiunoDir;
         public static String defaultardiunoDir = System.AppDomain.CurrentDomain.BaseDirectory + "arduino";
             //"C:\\Users\\Lenovo\\Downloads\\Arduino\\Arduino\\Arduino1.8.8\\arduino-1.8.8";
