@@ -550,6 +550,7 @@ namespace WpfApp2
                 case System.Windows.Forms.DialogResult.OK:
                     StreamReader stream = new StreamReader(fileDialog.FileName.ToString());
                     loadFromFile(stream);
+                    stream.Close();
                     break;
                 case System.Windows.Forms.DialogResult.Cancel:
                 default:
