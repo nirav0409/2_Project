@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ConfigWindow" Height="450" Width="350">
     <Grid >
-        <Grid  HorizontalAlignment="Left" Height="180" Margin="67,93,0,0" VerticalAlignment="Top" Width="180">
+        <Grid x:Name="glowGrid"  HorizontalAlignment="Left" Height="180" Margin="67,93,0,0" VerticalAlignment="Top" Width="180">
             <Canvas x:Name ="Button6" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="112" Margin="34,95,0,0" MouseLeftButtonDown="remoteButtonClick_6">
                 <Canvas HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="112" Canvas.Top="10">
                     <Canvas.OpacityMask>

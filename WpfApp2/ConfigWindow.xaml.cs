@@ -41,7 +41,7 @@ namespace WpfApp2
             //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
             ellipse3.Stroke = Brushes.Black;
             ellipse3.StrokeThickness = 2;
-            glowGrid_Copy.Children.Add(ellipse3);
+            //glowGrid_Copy.Children.Add(ellipse3);
 
             glowGrid.Children.Add(ellipse);
             glowGrid.Children.Add(ellipse2);
@@ -56,7 +56,7 @@ namespace WpfApp2
             //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
             ellipse3.Stroke = Brushes.Yellow;
             ellipse3.StrokeThickness = 5;
-            glowGrid_Copy.Children.Add(ellipse3);
+           // glowGrid_Copy.Children.Add(ellipse3);
         }
 
         private void remoteButtonClick(object sender, MouseButtonEventArgs e)
