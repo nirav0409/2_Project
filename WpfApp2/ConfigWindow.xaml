@@ -6,9 +6,26 @@
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="ConfigWindow" Height="450" Width="350">
-    <Border BorderBrush="Black" HorizontalAlignment="Left" Height="356" Margin="0,0,0,0" VerticalAlignment="Top" Width="230">
-        <ScrollViewer x:Name="layoutViewer">
-            <StackPanel x:Name="layoutPanel" Height="1000" Width="230" MouseLeftButtonDown="myPreviewMouseLeftButtonDown" MouseLeftButtonUp="myPreviewMouseLeftButtonUp" Drop="myDrop" DragEnter="myDragEnter" MouseMove="myPreviewMouseMove" AllowDrop="True" />
-        </ScrollViewer>
-    </Border>
+    <Grid >
+        <Grid  HorizontalAlignment="Left" Height="180" Margin="67,93,0,0" VerticalAlignment="Top" Width="180">
+            <Canvas x:Name ="Button6" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="112" Margin="34,95,0,0" MouseLeftButtonDown="remoteButtonClick_6">
+                <Canvas HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="112" Canvas.Top="10">
+                    <Canvas.OpacityMask>
+                        <ImageBrush ImageSource="Images/arrow_up_7.ico"/>
+                    </Canvas.OpacityMask>
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="Images/arrow_up_7.ico"/>
+                    </Canvas.Background>
+                </Canvas>
+            </Canvas>
+            <Canvas x:Name ="Button5" Height="55" Width="112" Margin="34,35,34,80" MouseLeftButtonDown="remoteButtonClick" Grid.Row="1" >
+                <Canvas HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="112">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="Images/arrow_down_6.ico"/>
+                    </Canvas.Background>
+                </Canvas>
+            </Canvas>
+        </Grid>
+        
+    </Grid>
 </Window>

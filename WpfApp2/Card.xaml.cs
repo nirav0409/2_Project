@@ -35,8 +35,11 @@ namespace WpfApp2
             byte B = Convert.ToByte(layout.getB());
 
             //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-            this.layoutColor.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-
+           // this.layoutColor.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+            Ellipse ellipse = new Ellipse() { Height = 22, Width = 22 };
+            ellipse.Stroke = Brushes.Black;
+            ellipse.Fill   = new SolidColorBrush(Color.FromRgb(R, G, B));
+            this.layoutColor.Children.Add(ellipse);
         }
         public String getLayoutName()
         {
@@ -53,8 +56,17 @@ namespace WpfApp2
             byte B = Convert.ToByte(Blue);
 
             //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-            this.layoutColor.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-
+            //this.layoutColor.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
+            if(this.layoutColor.Children.Count <= 0)
+            {
+                Ellipse ellipse = new Ellipse() { Height = 22, Width = 22 };
+                ellipse.Fill = new SolidColorBrush(Color.FromRgb(R, G, B));
+                this.layoutColor.Children.Add(ellipse);
+            }
+            else
+            {
+                ((Ellipse)this.layoutColor.Children[0]).Fill = new SolidColorBrush(Color.FromRgb(R, G, B));
+            }
         }
         public int getLayoutIndex()
         {

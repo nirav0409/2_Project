@@ -26,110 +26,46 @@ namespace WpfApp2
         public ConfigWindow()
         {
             InitializeComponent();
-            InitUI();
-            sp = this.layoutPanel;
+            gridInit();
         }
-
-        private void InitUI()
+        private void gridInit()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                Card c = new Card();
-                c.layoutName.Content = "layoutName " + i;
-                c.layoutColor.Background = Brushes.Blue;
-                // layoutPanel.Items.Add(c);
-                layoutPanel.Children.Add(c);
-            }
-        }
-        Boolean isDown , isDragging;
-        Point startPoint;
-        StackPanel sp;
-        UIElement realDragSource;
-        UIElement dummyDragSource = new UIElement();
+            Ellipse ellipse = new Ellipse() { Height = 152, Width = 152 };
+            //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+            ellipse.Stroke = Brushes.Black;
+            Ellipse ellipse2 = new Ellipse() { Height = 140, Width = 140 };
+            //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+            ellipse2.Stroke = Brushes.Black;
 
-        private void myPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+            Ellipse ellipse3 = new Ellipse() { Height = 170, Width = 170 };
+            //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+            ellipse3.Stroke = Brushes.Black;
+            ellipse3.StrokeThickness = 2;
+            glowGrid_Copy.Children.Add(ellipse3);
+
+            glowGrid.Children.Add(ellipse);
+            glowGrid.Children.Add(ellipse2);
+
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("PreviewMouseLeftButtonDown");
-            if (e.Source == this.sp)
-            {
-            }
-            else
-            {
-                isDown = true;
-                startPoint = e.GetPosition(this.sp);
-            }
-
-
+            Ellipse ellipse3 = new Ellipse() { Height = 150, Width = 150 };
+            //ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
+            ellipse3.Stroke = Brushes.Yellow;
+            ellipse3.StrokeThickness = 5;
+            glowGrid_Copy.Children.Add(ellipse3);
         }
 
-        private void myPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void remoteButtonClick(object sender, MouseButtonEventArgs e)
         {
-
-            System.Diagnostics.Debug.WriteLine("PreviewMouseLeftButtonUp");
-            if(isDown == true && isDragging == false)
-            {
-                System.Diagnostics.Debug.WriteLine("Mouse Click");
-            }
-            isDown = false;
-            isDragging = false;
-            if(realDragSource != null)
-                realDragSource.ReleaseMouseCapture();
-
+            Debug.Print("button 5 clicked");
         }
-
-        private void myPreviewMouseMove(object sender, MouseEventArgs e)
+        private void remoteButtonClick_6(object sender, MouseButtonEventArgs e)
         {
-          //  Debug.WriteLine("PreViewMouseMove");
-            if (isDown)
-            {
-                if ((isDragging == false) && ((Math.Abs(e.GetPosition(this.sp).X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance) ||
-                    (Math.Abs(e.GetPosition(this.sp).Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance)))
-                {
-                    isDragging = true;
-                    realDragSource = e.Source as UIElement;
-                    realDragSource.CaptureMouse();
-                    DragDrop.DoDragDrop(dummyDragSource, new DataObject("UIElement", e.Source, true), DragDropEffects.Move);
-                }
-            }
+            Debug.Print("button 6 clicked");
         }
-
-        private void myDragEnter(object sender, DragEventArgs e)
-        {
-            Debug.WriteLine("DragEnter");
-            if (e.Data.GetDataPresent("UIElement"))
-            {
-                e.Effects = DragDropEffects.Move;
-            }
-        }
-        private void myDrop(object sender, DragEventArgs e)
-
-        {
-            Debug.WriteLine("Drop");
-            if (e.Data.GetDataPresent("UIElement"))
-            {
-                UIElement droptarget = e.Source as UIElement;
-                int droptargetIndex = -1, i = 0;
-                foreach (UIElement element in this.sp.Children)
-                {
-                    if (element.Equals(droptarget))
-                    {
-                        droptargetIndex = i;
-                        break;
-                    }
-                    i++;
-                }
-                if (droptargetIndex != -1)
-                {
-                    this.sp.Children.Remove(realDragSource);
-                    this.sp.Children.Insert(droptargetIndex, realDragSource);
-                }
-
-                isDown = false;
-                isDragging = false;
-                realDragSource.ReleaseMouseCapture();
-            }
-        }
-
-
     }
 }

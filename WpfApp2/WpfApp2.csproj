@@ -231,5 +231,14 @@
   <ItemGroup>
     <Resource Include="Images\edit_icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\color_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow_down_6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow_up_7.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

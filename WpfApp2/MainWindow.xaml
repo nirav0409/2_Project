@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
+        Closing="MainWindow_Closing"  
         Title="Remote Customizer" Height="550" Width="700" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,14 +27,14 @@
                     <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
                 </ScrollViewer>
             </Border>
-            <Border BorderBrush="Black" CornerRadius="30" BorderThickness="1" HorizontalAlignment="Left" Height="325" Margin="34,16,0,0" VerticalAlignment="Top" Width="278" Grid.RowSpan="2"/>
+            <Border BorderBrush="Black" CornerRadius="30" BorderThickness="1" HorizontalAlignment="Left" Height="373" Margin="34,16,0,0" VerticalAlignment="Top" Width="278" Grid.RowSpan="2"/>
             <Grid x:Name="buttonsGrid"  Margin="34,16,50,0" Height="325" VerticalAlignment="Top" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="67*"/>
                     <RowDefinition Height="223*"/>
                 </Grid.RowDefinitions>
 
-                <Button  x:Name="Button0" Content="1" Click="remoteButtonClick" Margin="32,72,192,132" FontSize="18" FontWeight="Bold" Grid.Row="1">
+                <Button  x:Name="Button0"  Click="remoteButtonClick" Margin="32,72,192,132" FontSize="18" FontWeight="Bold" Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -43,7 +44,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button  x:Name="Button1" Content="2" Click="remoteButtonClick" Margin="108,71,116,132" RenderTransformOrigin="0.429,0.312" FontSize="18" FontWeight="Bold" Grid.Row="1">
+                <Button  x:Name="Button1" Content="" Click="remoteButtonClick" Margin="108,71,116,132" RenderTransformOrigin="0.429,0.312" FontSize="18" FontWeight="Bold" Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -53,7 +54,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button  x:Name="Button2" Content="3" Click="remoteButtonClick" Margin="189,72,35,132" FontWeight="Bold" FontSize="18" Grid.Row="1">
+                <Button  x:Name="Button2" Content="" Click="remoteButtonClick" Margin="189,72,35,132" FontWeight="Bold" FontSize="18" Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -63,7 +64,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button  x:Name="Button3" Content="4" Click="remoteButtonClick" Margin="69,161,155,41" RenderTransformOrigin="0.5,0.519" FontSize="18" FontWeight="Bold" Grid.Row="1">
+                <Button  x:Name="Button3" Content="" Click="remoteButtonClick" Margin="69,161,155,41" RenderTransformOrigin="0.5,0.519" FontSize="18" FontWeight="Bold" Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -73,7 +74,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button  x:Name="Button4" Content="5" Click="remoteButtonClick" Margin="155,161,69,41" FontSize="18" FontWeight="Bold" Grid.Row="1">
+                <Button  x:Name="Button4" Content="" Click="remoteButtonClick" Margin="155,161,69,41" FontSize="18" FontWeight="Bold" Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -184,30 +185,40 @@
         </Grid>
 
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
-            <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="236,434,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="143,401,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
+            <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="175,482,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked" Background="White" FontFamily="Arial"/>
+            <Button Content="Load" HorizontalAlignment="Left" Margin="175,451,0,0" VerticalAlignment="Top" Width="75" Click="loadButtonClicked" Background="White" FontFamily="Arial"/>
+            <ComboBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="85,482,0,0"  VerticalAlignment="Top" Width="75" FontFamily="Arial">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+            <Button HorizontalAlignment="Left" Margin="650,12,-367,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.827,-3.45" Click="editLayoutClicked" Height="29" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
+                    <ImageBrush ImageSource="Images/color_circle.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
-            <Button Content="" HorizontalAlignment="Left" Margin="95,398,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0" Height="29">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
-                </Button.Background>
-            </Button>
-            <ScrollViewer x:Name="layoutViewer" Margin="40,37,45,128">
-                <StackPanel x:Name="layoutPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="1000" Width="230" MouseLeftButtonDown="myPreviewMouseLeftButtonDown" MouseLeftButtonUp="myPreviewMouseLeftButtonUp" Drop="myDrop" DragEnter="myDragEnter" MouseMove="myPreviewMouseMove" AllowDrop="True" />
-            </ScrollViewer>
-            <Button Content="Save" HorizontalAlignment="Left" Margin="5,434,0,0" VerticalAlignment="Top" Width="75" Click="saveButtonClicked"/>
-            <Button Content="Load" HorizontalAlignment="Left" Margin="85,434,0,0" VerticalAlignment="Top" Width="75" Click="loadButtonClicked"/>
-            <ComboBox x:Name="comPortBox" HorizontalAlignment="Left" Height="20" Margin="164,434,0,0"  VerticalAlignment="Top" Width="68"/>
-            <Button HorizontalAlignment="Left" Margin="185,398,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.827,-3.45" Click="editLayoutClicked" Height="29" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/edit_icon.ico" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
-            <Button Content="Export" HorizontalAlignment="Left" Margin="5,470,0,0" VerticalAlignment="Top" Width="75" Click="exportButtonClicked"/>
+            <Button Content="Save" HorizontalAlignment="Left" Margin="85,451,0,0" VerticalAlignment="Top" Width="75" Click="exportButtonClicked" Background="White" FontFamily="Arial"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="401" VerticalAlignment="Top" Width="213" Margin="64,36,0,0">
+                <Grid>
+                    <ScrollViewer x:Name="layoutViewer" Margin="-2,7,0,36" HorizontalAlignment="Right" Width="228">
+                        <StackPanel x:Name="layoutPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="1000" Width="230" MouseLeftButtonDown="myPreviewMouseLeftButtonDown" MouseLeftButtonUp="myPreviewMouseLeftButtonUp" Drop="myDrop" DragEnter="myDragEnter" MouseMove="myPreviewMouseMove" AllowDrop="True" />
+                    </ScrollViewer>
+                    <Button Content="" HorizontalAlignment="Left" Margin="59,367,0,0" VerticalAlignment="Top" Width="33" Click="addLayout" BorderThickness="0" Height="29">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/Plus_Icon.ico" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="" HorizontalAlignment="Left" Margin="105,367,0,0" VerticalAlignment="Top"  Width="33" Click="removeSelectedLayoutItem" BorderThickness="0" Height="26">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/Minus_Icon.ico" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
 
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

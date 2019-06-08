@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
@@ -233,9 +234,10 @@ namespace WpfApp2
                 MessageBox.Show("Please Select Layout");
                 return;
             }
+
             layouts.RemoveAt(selectedLayoutIndex);
             layoutPanel.Children.RemoveAt(selectedLayoutIndex);
-
+            selectedLayoutIndex = -1;
             if (glowCanvas.Children != null)
                 glowCanvas.Children.Clear();
 
@@ -308,7 +310,8 @@ namespace WpfApp2
             return "";
         }
 
-        private void saveButtonClicked(object sender, RoutedEventArgs e)
+        //private void saveButtonClicked(object sender, RoutedEventArgs e)
+        private void SaveData()
         {
             StreamWriter streamWriter = new StreamWriter(Constants.path);
             streamWriter.WriteLine(this.layouts.Count);
@@ -326,7 +329,7 @@ namespace WpfApp2
             streamWriter.Close();
             createArdiunoFile(Constants.pathUno);
 
-            MessageBox.Show("Saved\nLocation : " + Constants.pathUno);
+           /// MessageBox.Show("Saved\nLocation : " + Constants.pathUno);
         }
 
         private void createArdiunoFile(String path)
@@ -448,6 +451,7 @@ namespace WpfApp2
                     //Only Media is Selected
 
                     String mediaCmd = layouts[layoutNumber].getValueofButton(buttonIndex).ToUpper().Replace(' ', '_');
+                    mediaCmd = mediaCmd.Replace('/', '_');
                     return ("\n\t\t\t\t" + "Consumer.write(" + mediaCmd + ");\n");
 
                 case 3:
@@ -481,7 +485,10 @@ namespace WpfApp2
             }
             else
             {
-                outputTextBlock.Text = "Running Command,This May Take 2-3 Minutes, Please Wait.....\n";
+                outputTextBlock.Text = "Saving Current Stuats.....\n";
+                SaveData();
+                outputTextBlock.Text += "Saved Current Stuats to : \"" + Constants.pathUno + "\"";
+                outputTextBlock.Text += "\nRunning Command,This May Take 2-3 Minutes, Please Wait.....\n";
                 String port = comPortBox.Text;
                 Thread thread = new Thread(() => runCmd(port));
                 thread.Start();  
@@ -696,7 +703,17 @@ namespace WpfApp2
                 e.Effects = DragDropEffects.Move;
             }
         }
-
+        public void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (MessageBox.Show("Dou you want to save current status?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                //do no stuff
+                SaveData();
+              //  MessageBox.Show("you changes saved");
+            }
+           
+            
+        }
         private void editLayoutClicked(object sender, RoutedEventArgs e)
         {
             if (selectedLayoutIndex < 0) {
