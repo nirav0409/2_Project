@@ -6,183 +6,12 @@
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Closing="MainWindow_Closing"  
-        Title="Remote Customizer" Height="550" Width="700" ResizeMode="NoResize">
+        Title="Remote Customizer" Height="588" Width="700" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275*"/>
             <ColumnDefinition Width="317*"/>
         </Grid.ColumnDefinitions>
-        <Grid  x:Name="buttonGrid" Margin="9,-2,1,-15" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="90*"/>
-                <RowDefinition Height="83*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="settingsButton" Content="" HorizontalAlignment="Left" Margin="326,16,0,0" VerticalAlignment="Top" Width="20" Height="21" BorderThickness="0" Opacity="0.5" Click="settingsButtonClicked">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/settings.ico"/>
-                </Button.Background>
-            </Button>
-            <Border BorderBrush="Blue" CornerRadius="25" Height="163" VerticalAlignment="Top" Margin="0,77,0,0" Grid.Row="1">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="sv1" Margin="10,-2,-2,2" >
-                    <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
-                </ScrollViewer>
-            </Border>
-            <Border BorderBrush="Black" CornerRadius="30" BorderThickness="1" HorizontalAlignment="Left" Height="373" Margin="34,16,0,0" VerticalAlignment="Top" Width="278" Grid.RowSpan="2"/>
-            <Grid x:Name="buttonsGrid"  Margin="34,16,50,0" Height="325" VerticalAlignment="Top" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="67*"/>
-                    <RowDefinition Height="223*"/>
-                </Grid.RowDefinitions>
-
-                <Button  x:Name="Button0"  Click="remoteButtonClick" Margin="32,72,192,132" FontSize="18" FontWeight="Bold" Grid.Row="1">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse Fill="White"  Stroke="Black" />
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button  x:Name="Button1" Content="" Click="remoteButtonClick" Margin="108,71,116,132" RenderTransformOrigin="0.429,0.312" FontSize="18" FontWeight="Bold" Grid.Row="1">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse   Fill="White"  Stroke="Black" />
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button  x:Name="Button2" Content="" Click="remoteButtonClick" Margin="189,72,35,132" FontWeight="Bold" FontSize="18" Grid.Row="1">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse Fill="White"  Stroke="Black" />
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button  x:Name="Button3" Content="" Click="remoteButtonClick" Margin="69,161,155,41" RenderTransformOrigin="0.5,0.519" FontSize="18" FontWeight="Bold" Grid.Row="1">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse Fill="White"  Stroke="Black" />
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button  x:Name="Button4" Content="" Click="remoteButtonClick" Margin="155,161,69,41" FontSize="18" FontWeight="Bold" Grid.Row="1">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Ellipse Fill="White"  Stroke="Black" />
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Grid HorizontalAlignment="Left" Margin="69,15,0,208" Width="133" Grid.RowSpan="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="104*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="71*"/>
-                        <RowDefinition Height="25*"/>
-                        <RowDefinition Height="35*"/>
-                    </Grid.RowDefinitions>
-
-                    <Canvas x:Name="Button5" Margin="0,0,17,19" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="remoteButtonClick" Grid.Column="1">
-
-                        <Path Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Canvas.Top="25.311" Canvas.Left="0.5" Height="42.878" Stretch="Fill" Width="83" StrokeThickness="2" RenderTransformOrigin="0.521,0.288" Data="M0,20 A20,20,0,1,0,40,20">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleY="-1"/>
-                                    <SkewTransform AngleY="0" AngleX="0"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform X="0.663" Y="0.501"/>
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                            <Path.Fill>
-                                <ImageBrush ImageSource="Images/arrows.png">
-                                    <ImageBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="-0.2" ScaleY="1" ScaleX="-1"/>
-                                            <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="-0.2"/>
-                                            <RotateTransform Angle="528.69" CenterY="0.5" CenterX="-0.2"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </ImageBrush.RelativeTransform>
-                                </ImageBrush>
-                            </Path.Fill>
-                        </Path>
-                    </Canvas>
-                    <Canvas x:Name="Button6" Margin="0,45,17,0"  RenderTransformOrigin="0.5,0.5" Height="53" VerticalAlignment="Top" MouseLeftButtonDown="remoteButtonClick" Grid.RowSpan="3" Grid.Column="1">
-                        <Canvas.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="180"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Canvas.RenderTransform>
-
-                        <Path Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Canvas.Top="25.061" Canvas.Left="2.510" Height="42.878" Stretch="Fill" Width="83" StrokeThickness="2" RenderTransformOrigin="0.521,0.288" Data="M0,20 A20,20,0,1,0,40,20">
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleY="-1"/>
-                                    <SkewTransform AngleY="0" AngleX="0"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform X="0.663" Y="0.501"/>
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                            <Path.Fill>
-                                <ImageBrush ImageSource="Images/arrows.png">
-                                    <ImageBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="-0.2" ScaleY="1" ScaleX="-1"/>
-                                            <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="-0.2"/>
-                                            <RotateTransform Angle="528.69" CenterY="0.5" CenterX="-0.2"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </ImageBrush.RelativeTransform>
-                                </ImageBrush>
-                            </Path.Fill>
-                        </Path>
-                    </Canvas>
-                </Grid>
-                <Border  Margin="10,123,188,102" BorderThickness="1"  Height="25" Grid.Row="1">
-                    <Label  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="bLabel0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"  FontSize="9" Width="80" Height="25"  Margin="2,0,2,-1"/>
-                </Border>
-                <Border Height="25" Margin="96,123,100,102" BorderThickness="1"  Grid.Row="1">
-
-                    <Label x:Name="bLabel1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="1"  FontSize="9" Width="80" Height="25" Margin="2,0,2,-1"/>
-                </Border>
-                <Border Height="25" Margin="183,123,10,102" BorderThickness="1"  Grid.Row="1">
-                    <Label x:Name="bLabel2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="1"  FontSize="9" Width="80" Height="25" Margin="2,0,2,-1"/>
-                </Border>
-
-                <Border Height="25" Margin="47,215,146,10" BorderThickness="1"  Grid.Row="1">
-                    <Label x:Name="bLabel3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="1"  FontSize="9" Height="26" Width="80" Margin="2,0,2,-1"/>
-                </Border>
-                <Border Height="25" Margin="146,215,49,10" BorderThickness="1"  Grid.Row="1">
-                    <Label x:Name="bLabel4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="1"  FontSize="9" Width="80" Height="25" Margin="2,0,2,-1"/>
-                </Border>
-
-                <Border Height="25" Margin="186,15,10,35" BorderThickness="1" >
-                    <Label x:Name="bLabel5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"  VerticalAlignment="Center"  FontSize="9" Width="80" Height="25" Margin="2,0,2,-1"/>
-                </Border>
-                <Border Height="25" Margin="186,42,10,183" BorderThickness="1"  Grid.Row="1">
-                    <Label x:Name="bLabel6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.Row="1" FontSize="9" Width="80" Height="25" Margin="2,0,2,-1"/>
-                </Border>
-                <Canvas x:Name="glowCanvas" Height="107" Width="107" Margin="83,10,89,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-
-            </Grid>
-        </Grid>
 
         <Grid  x:Name="mainGrid" Height="521" Width="313" HorizontalAlignment="Left"  Margin="3,-2,0,0" VerticalAlignment="Top">
             <Button x:Name="uploadButton" Content="Upload" HorizontalAlignment="Left" Margin="175,482,0,0" VerticalAlignment="Top" Width="75" Click="uploadButtonClicked" Background="White" FontFamily="Arial"/>
@@ -195,11 +24,6 @@
                     </LinearGradientBrush>
                 </ComboBox.Background>
             </ComboBox>
-            <Button HorizontalAlignment="Left" Margin="650,12,-367,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="1.827,-3.45" Click="editLayoutClicked" Height="29" BorderThickness="0">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/color_circle.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
             <Button Content="Save" HorizontalAlignment="Left" Margin="85,451,0,0" VerticalAlignment="Top" Width="75" Click="exportButtonClicked" Background="White" FontFamily="Arial"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="401" VerticalAlignment="Top" Width="213" Margin="64,36,0,0">
                 <Grid>
@@ -218,6 +42,118 @@
                     </Button>
 
                 </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="remoteGrid" Grid.Column="1" HorizontalAlignment="Left" Height="519" Margin="0,10,0,0" VerticalAlignment="Top" Width="362">
+            <Grid x:Name="remoteLayoutGrid" HorizontalAlignment="Left" Height="396" Margin="27,1,0,0" VerticalAlignment="Top" Width="310">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images/RemoteOuter.png"/>
+                </Grid.Background>
+            </Grid>
+            <Grid x:Name="glowGrid"  HorizontalAlignment="Left" Height="180" Margin="91,27,0,0" VerticalAlignment="Top" Width="180">
+                <Canvas x:Name ="Button6" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="112" Margin="34,95,0,0" MouseLeftButtonDown="remoteButtonClick">
+                    <Canvas HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="112" Canvas.Top="10">
+                        <Canvas.OpacityMask>
+                            <ImageBrush ImageSource="Images/arrow_up_7.ico"/>
+                        </Canvas.OpacityMask>
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="Images/arrow_up_7.ico"/>
+                        </Canvas.Background>
+                    </Canvas>
+                </Canvas>
+                <Canvas x:Name ="Button5" Height="55" Width="112" Margin="34,35,34,80" MouseLeftButtonDown="remoteButtonClick" Grid.Row="1" >
+                    <Canvas HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="112">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="Images/arrow_down_6.ico"/>
+                        </Canvas.Background>
+                    </Canvas>
+                </Canvas>
+                <Grid>
+                    <Ellipse Height="152" Width="152"    Stroke="Black" />
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Ellipse Height="140" Width="140"    Stroke="Black" />
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Ellipse Height="170" Width="170" StrokeThickness="2" Stroke="Black" />
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Ellipse x:Name="glowCanvas" Height="150" Width="150" StrokeThickness="5" Stroke="White" />
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Button  x:Name="Button0"  Click="remoteButtonClick" Margin="51,222,257,250" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button  x:Name="Button2"  Click="remoteButtonClick" Margin="249,222,59,250" FontWeight="Bold" FontSize="18">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button  x:Name="Button1"  Click="remoteButtonClick" Margin="148,222,160,250" RenderTransformOrigin="0.429,0.312" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse   Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button  x:Name="Button4"  Click="remoteButtonClick" Margin="205,305,103,166" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button  x:Name="Button3"  Click="remoteButtonClick" Margin="91,305,217,166" RenderTransformOrigin="0.5,0.519" FontSize="18" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="White"  Stroke="Black" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Label  x:Name="bLabel2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" FontFamily="Arial" VerticalAlignment="Center"  FontSize="9" Width="80" Height="25" Margin="233,274,49,220"/>
+            <Label  x:Name="bLabel0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" FontFamily="Arial" VerticalAlignment="Top"  FontSize="9" Width="80" Height="25"  Margin="38,274,244,0"/>
+            <Label  x:Name="bLabel1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center"  FontFamily="Arial" VerticalAlignment="Center"  FontSize="9" Width="80" Height="26" Margin="135,274,147,219"/>
+            <Label  x:Name="bLabel3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="9" Height="26" Width="80" Margin="78,358,204,135"/>
+            <Label  x:Name="bLabel4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" VerticalAlignment="Center"  FontSize="9" Width="80" Height="24" Margin="192,358,90,137"/>
+            <Label  x:Name="bLabel5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" VerticalAlignment="Center"  FontSize="9" Width="80" Height="25" Margin="143,97,139,397"/>
+            <Label  x:Name="bLabel6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" FontFamily="Arial" VerticalAlignment="Center" FontSize="9" Width="80" Height="25" Margin="144,118,138,376"/>
+            <Button Content="" HorizontalAlignment="Left" Margin="280,27,0,0" VerticalAlignment="Top" Width="33" Click="editLayoutClicked" BorderThickness="0" Height="29">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/color_circle.png" Stretch="Fill"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <Grid  x:Name="outputWindowGrid" Height="163" Margin="7,396,3,0" Grid.Column="1">
+            <Border BorderBrush="Black" CornerRadius="25" Height="163" VerticalAlignment="Top" Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="sv1" Margin="10,-2,-2,2" >
+                    <TextBlock x:Name="outputTextBlock" Foreground="White" Background="Black" TextWrapping="Wrap" Width="330" Height="3094"  FontSize="11" FontFamily="Courier New"/>
+                </ScrollViewer>
             </Border>
         </Grid>
     </Grid>

@@ -240,5 +240,8 @@
   <ItemGroup>
     <Resource Include="Images\arrow_up_7.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RemoteOuter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -238,8 +238,7 @@ namespace WpfApp2
             layouts.RemoveAt(selectedLayoutIndex);
             layoutPanel.Children.RemoveAt(selectedLayoutIndex);
             selectedLayoutIndex = -1;
-            if (glowCanvas.Children != null)
-                glowCanvas.Children.Clear();
+            glowCanvas.Stroke = Brushes.White;
 
             foreach (Button b in buttons)
                 b.ToolTip = "Select Layout";
@@ -496,7 +495,7 @@ namespace WpfApp2
         }
 
         private void runCmd(String port)
-        {
+        {   
             try
             {
                 //outputTextBlock.Text = "Hello World";
@@ -592,8 +591,7 @@ namespace WpfApp2
             this.layouts = layouts;
             layoutPanel.Children.Clear();
             InitUI();
-            if(glowCanvas.Children != null)
-                glowCanvas.Children.Clear();
+            glowCanvas.Stroke = Brushes.White;
 
 
 
@@ -655,11 +653,11 @@ namespace WpfApp2
             byte B = Convert.ToByte(layouts[selectedLayoutIndex].getB());
 
             //buttonGrid.Background = new SolidColorBrush(Color.FromRgb(R, G, B));
-            Ellipse ellipse = new Ellipse() { Height = 107, Width = 107 };
+            /*Ellipse ellipse = new Ellipse() { Height = 107, Width = 107 };
             ellipse.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
             ellipse.StrokeThickness = 5;
-            glowCanvas.Children.Add(ellipse);
-            
+            glowCanvas.Children.Add(ellipse)*/
+             glowCanvas.Stroke = new SolidColorBrush(Color.FromRgb(R, G, B));
             //set tooltips
             Button0.ToolTip = getTooltip(selectedLayoutIndex, 0);
             Button1.ToolTip = getTooltip(selectedLayoutIndex, 1);
