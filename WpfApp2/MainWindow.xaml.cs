@@ -412,7 +412,7 @@ namespace WpfApp2
             caseCodeForLayout.Append("\n\t\t\tswitch(" + "button" + ")" + " {");
             for (int i = 0; i < 7; i++)
             {
-                caseCodeForLayout.Append("\n\t\t\t\tcase " + i + ":");
+                caseCodeForLayout.Append("\n\t\t\t\tcase " + (i+1) + ":");
                 caseCodeForLayout.Append(getButtonCaseCode(layoutNumber, i));
                 caseCodeForLayout.Append("\n\t\t\t\tbreak;");
 
@@ -500,6 +500,8 @@ namespace WpfApp2
             {
                 //outputTextBlock.Text = "Hello World";
                 String cmd = "arduino_debug --upload --port " + port + " \"" + Constants.pathUno+"\"";
+               // String myPath = "C:\\Users\\Lenovo\\source\\repos\\WpfApp2\\WpfApp2\\bin\\Debug\\garbage\\UnoFile.ino";
+                //String cmd = "arduino_debug --upload --port " + port + " \"" + myPath + "\"";
                 Debug.WriteLine(cmd);
                 System.Diagnostics.ProcessStartInfo procStartInfo =
                         new System.Diagnostics.ProcessStartInfo("cmd", "/c " + cmd);
@@ -510,12 +512,14 @@ namespace WpfApp2
                 procStartInfo.RedirectStandardError = true;
                 procStartInfo.UseShellExecute = false;
                 procStartInfo.WorkingDirectory = Constants.ardiunoDir;
+                
                 // Do not create the black window.
                 procStartInfo.CreateNoWindow = true;
                 // Now we create a process, assign its Process StartInfo and start it
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo = procStartInfo;
                 proc.Start();
+                
                 // Get the output into a string
                 String line = "";
                 while (!proc.StandardOutput.EndOfStream)
@@ -527,6 +531,10 @@ namespace WpfApp2
                     line = line + proc.StandardError.ReadToEnd();
                 }
 
+                if(proc.ExitCode == 0)
+                {
+                    line += "\nUpload is successful";
+                }
 
 
                 Dispatcher.BeginInvoke(new ThreadStart(() => outputTextBlock.Text = line.Trim()));
